@@ -1,23 +1,36 @@
 <template>
   <div id="app">
-    <div class="app__header">
-      Project
-    </div>
-    <div class="app__body">
-      <el-card
-        v-for="(project, index) in projects"
-        v-bind:key="index"
-        class="card"
-        :body-style="{ padding: '0px', overflow: 'hidden' }"
-        shadow="hover"
+    <el-container>
+      <el-aside
+        class="aside"
+        width="200px"
       >
-        <div class="image" :style="`background-image: url(${project.imageSrc});`"></div>
-        <div class="bottom">
-          <span class="name">{{ project.projectName }}</span>
-          <el-button class="button" type="primary" round size="mini" @click="onClick(project.homePageUrl)">GO</el-button>
+        <el-avatar
+          class="avatar"
+          size="large"
+          src="https://avatars0.githubusercontent.com/u/20488904?s=460&v=4"
+        ></el-avatar>
+        <div>kyuchan</div>
+      </el-aside>
+      <el-main style="padding: 0;">
+        <div class="app__header">Project</div>
+        <div class="app__body">
+          <el-card
+            v-for="(project, index) in projects"
+            v-bind:key="index"
+            class="card"
+            :body-style="{ padding: '0px', overflow: 'hidden' }"
+            shadow="hover"
+          >
+            <div class="image" :style="`background-image: url(${project.imageSrc});`"></div>
+            <div class="bottom">
+              <span class="name">{{ project.projectName }}</span>
+              <el-button class="button" type="primary" round size="mini" @click="onClick(project.homePageUrl)">GO</el-button>
+            </div>
+          </el-card>
         </div>
-      </el-card>
-    </div>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
@@ -31,27 +44,29 @@ export default {
         {
           imageSrc: "https://blog.kyuchan.cn/img/favicon_64.ico",
           projectName: "blog",
-          homePageUrl: "http://blog.kyuchan.cn",
+          homePageUrl: "http://blog.kyuchan.cn"
         },
         {
-          imageSrc: "https://raw.githubusercontent.com/kyuch4n/royce-ui/master/assets/logo.png",
+          imageSrc:
+            "https://raw.githubusercontent.com/kyuch4n/royce-ui/master/assets/logo.png",
           projectName: "royce-ui",
-          homePageUrl: "http://x.kyuchan.cn/royce-ui/",
+          homePageUrl: "http://x.kyuchan.cn/royce-ui/"
         },
         {
-          imageSrc: "https://raw.githubusercontent.com/kyuch4n/man-friday/master/src/assets/logo.png",
+          imageSrc:
+            "https://raw.githubusercontent.com/kyuch4n/man-friday/master/src/assets/logo.png",
           projectName: "man-friday",
-          homePageUrl: "https://github.com/kyuch4n/man-friday",
-        },
-      ],
+          homePageUrl: "https://github.com/kyuch4n/man-friday"
+        }
+      ]
     };
   },
 
   methods: {
     onClick(homePageUrl) {
       window.open(homePageUrl);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -61,10 +76,24 @@ body {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #ccc;
+}
+
+.aside {
+  padding: 20px 0;
+  min-height: 100vh;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  background: #24292e;
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .app__header {
@@ -85,7 +114,7 @@ body {
 }
 
 .app__body {
-  padding: 20px 40px;
+  padding: 20px 0;
   display: grid;
   grid-template-columns: 20% 20% 20% 20%;
   grid-column-gap: 5%;
