@@ -1,36 +1,30 @@
 <template>
   <div id="app">
-    <el-container>
-      <el-aside
-        class="aside"
-        width="200px"
+    <div class="app__header">
+      Project
+      <el-avatar
+        class="avatar"
+        src="https://avatars0.githubusercontent.com/u/20488904?s=460&v=4"
+        @click.native="onClick('https://github.com/kyuch4n')"
       >
-        <el-avatar
-          class="avatar"
-          size="large"
-          src="https://avatars0.githubusercontent.com/u/20488904?s=460&v=4"
-        ></el-avatar>
-        <div>kyuchan</div>
-      </el-aside>
-      <el-main style="padding: 0;">
-        <div class="app__header">Project</div>
-        <div class="app__body">
-          <el-card
-            v-for="(project, index) in projects"
-            v-bind:key="index"
-            class="card"
-            :body-style="{ padding: '0px', overflow: 'hidden' }"
-            shadow="hover"
-          >
-            <div class="image" :style="`background-image: url(${project.imageSrc});`"></div>
-            <div class="bottom">
-              <span class="name">{{ project.projectName }}</span>
-              <el-button class="button" type="primary" round size="mini" @click="onClick(project.homePageUrl)">GO</el-button>
-            </div>
-          </el-card>
+      </el-avatar>
+      <div class="name">kyuchan</div>
+    </div>
+    <div class="app__body">
+      <el-card
+        v-for="(project, index) in projects"
+        v-bind:key="index"
+        class="card"
+        :body-style="{ padding: '0px', overflow: 'hidden' }"
+        shadow="hover"
+      >
+        <div class="image" :style="`background-image: url(${project.imageSrc});`"></div>
+        <div class="bottom">
+          <span class="name">{{ project.projectName }}</span>
+          <el-button class="button" type="primary" round size="mini" @click="onClick(project.homePageUrl)">GO</el-button>
         </div>
-      </el-main>
-    </el-container>
+      </el-card>
+    </div>
   </div>
 </template>
 
@@ -63,8 +57,8 @@ export default {
   },
 
   methods: {
-    onClick(homePageUrl) {
-      window.open(homePageUrl);
+    onClick(url) {
+      window.open(url);
     }
   }
 };
@@ -73,6 +67,7 @@ export default {
 <style lang="less">
 body {
   margin: 0;
+  user-select: none;
 }
 
 #app {
@@ -82,23 +77,10 @@ body {
   color: #ccc;
 }
 
-.aside {
-  padding: 20px 0;
-  min-height: 100vh;
-  text-align: center;
-  color: #fff;
-  font-size: 20px;
-  background: #24292e;
-
-  .avatar {
-    width: 100px;
-    height: 100px;
-  }
-}
-
 .app__header {
+  position: relative;
   width: 100%;
-  height: 250px;
+  height: 40vh;
 
   display: flex;
   align-items: center;
@@ -111,10 +93,32 @@ body {
   font-size: 80px;
   color: #fff;
   font-weight: 600;
+
+  .avatar {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+  .name {
+    position: absolute;
+    top: 16px;
+    right: 64px;
+
+    font-size: 14px;
+    line-height: 40px;
+  }
 }
 
 .app__body {
+  margin: 0 auto;
   padding: 20px 0;
+  max-width: 960px;
+
   display: grid;
   grid-template-columns: 20% 20% 20% 20%;
   grid-column-gap: 5%;

@@ -1,22 +1,16 @@
 import Vue from "vue";
 import {
-    Avatar,
-    Container,
-    Aside,
-    Main,
     Card,
     Button,
+    Avatar,
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import App from "./App.vue";
 
-Vue.component(Avatar.name, Avatar);
-Vue.component(Container.name, Container);
-Vue.component(Aside.name, Aside);
-Vue.component(Main.name, Main);
 Vue.component(Card.name, Card);
 Vue.component(Button.name, Button);
+Vue.component(Avatar.name, Avatar);
 
 Vue.config.productionTip = false;
 
