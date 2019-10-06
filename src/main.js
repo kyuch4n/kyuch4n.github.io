@@ -3,8 +3,8 @@ import {
     Card,
     Button,
     Avatar,
-} from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+} from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
 
 import App from "./App.vue";
 
