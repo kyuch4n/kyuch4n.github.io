@@ -8,7 +8,6 @@
         @click.native="onClick('https://github.com/kyuch4n')"
       >
       </el-avatar>
-      <div class="name">kyuchan</div>
     </div>
     <div class="app__body">
       <el-card
@@ -102,15 +101,6 @@ body {
     width: 40px;
     height: 40px;
     cursor: pointer;
-  }
-
-  .name {
-    position: absolute;
-    top: 16px;
-    right: 64px;
-
-    font-size: 14px;
-    line-height: 40px;
   }
 }
 
