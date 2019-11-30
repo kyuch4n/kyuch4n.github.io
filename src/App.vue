@@ -50,6 +50,12 @@ export default {
             "https://raw.githubusercontent.com/kyuch4n/man-friday/master/src/assets/logo.png",
           projectName: "man-friday",
           homePageUrl: "https://github.com/kyuch4n/man-friday"
+        },
+        {
+          imageSrc:
+              "https://raw.githubusercontent.com/kyuch4n/it-is-a-state-machine/master/assets/logo.png",
+          projectName: "it-is-a-state-machine",
+          homePageUrl: "https://github.com/kyuch4n/it-is-a-state-machine"
         }
       ]
     };
@@ -122,7 +128,7 @@ body {
       margin: 8px;
       padding-bottom: 100%;
       background-repeat: no-repeat;
-      background-size: 50%;
+      background-size: 80%;
       background-position: center;
       background-color: #fff;
     }
