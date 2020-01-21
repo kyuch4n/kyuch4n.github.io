@@ -1,23 +1,12 @@
 <template>
   <div id="app">
     <div class="app__header">
-      Project
-      <el-avatar
-        class="avatar"
-        src="https://avatars0.githubusercontent.com/u/20488904?s=460&v=4"
-        @click.native="onClick('https://github.com/kyuch4n')"
-      >
-      </el-avatar>
+      Pr<span style="font-size: 60px;">⚙️</span>ject
+      <el-avatar class="avatar" src="https://avatars0.githubusercontent.com/u/20488904?s=460&v=4" @click.native="onClick('https://github.com/kyuch4n')"></el-avatar>
     </div>
     <div class="app__body">
-      <el-card
-        v-for="(project, index) in projects"
-        v-bind:key="index"
-        class="card"
-        :body-style="{ padding: '0px', overflow: 'hidden' }"
-        shadow="hover"
-      >
-        <div class="image" :style="`background-image: url(${project.imageSrc});`"></div>
+      <el-card v-for="(project, index) in projects" v-bind:key="index" class="card" :body-style="{ padding: '0px', overflow: 'hidden' }" shadow="hover">
+        <div class="image" :style="`background-image: url(${project.imageSrc}); background-size: ${project.bgSize ? project.bgSize : '80%'};`"></div>
         <div class="bottom">
           <span class="name">{{ project.projectName }}</span>
           <el-button class="button" type="primary" round size="mini" @click="onClick(project.homePageUrl)">GO</el-button>
@@ -33,32 +22,14 @@ export default {
 
   data() {
     return {
-      projects: [
-        {
-          imageSrc: "https://blog.kyuchan.cn/img/favicon_64.ico",
-          projectName: "blog",
-          homePageUrl: "http://blog.kyuchan.cn"
-        },
-        {
-          imageSrc:
-            "https://raw.githubusercontent.com/kyuch4n/royce-ui/master/assets/logo.png",
-          projectName: "royce-ui",
-          homePageUrl: "http://x.kyuchan.cn/royce-ui/"
-        },
-        {
-          imageSrc:
-            "https://raw.githubusercontent.com/kyuch4n/man-friday/master/src/assets/logo.png",
-          projectName: "man-friday",
-          homePageUrl: "https://github.com/kyuch4n/man-friday"
-        },
-        {
-          imageSrc:
-              "https://raw.githubusercontent.com/kyuch4n/it-is-a-state-machine/master/assets/logo.png",
-          projectName: "it-is-a-state-machine",
-          homePageUrl: "https://github.com/kyuch4n/it-is-a-state-machine"
-        }
-      ]
+      projects: [],
     };
+  },
+
+  beforeCreate() {
+    fetch("https://api.jsonbin.io/b/5e2717ef8d761771cc94f795")
+      .then(res => res.json())
+      .then(({ data }) => this.projects = data)
   },
 
   methods: {
@@ -128,7 +99,6 @@ body {
       margin: 8px;
       padding-bottom: 100%;
       background-repeat: no-repeat;
-      background-size: 80%;
       background-position: center;
       background-color: #fff;
     }
