@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <div class="app__header">
-      Pr<span style="font-size: 60px;">⚙️</span>ject
-      <el-avatar class="avatar" src="https://avatars0.githubusercontent.com/u/20488904?s=460&v=4" @click.native="onClick('https://github.com/kyuch4n')"></el-avatar>
+      <el-avatar class="avatar" src="https://avatars1.githubusercontent.com/u/20488904" @click.native="onClick('https://github.com/kyuch4n')"></el-avatar>
+      <el-input class="search-input" size="small" v-model="input">
+        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      </el-input>
     </div>
     <div class="app__body">
       <el-card v-for="(project, index) in projects" v-bind:key="index" class="card" :body-style="{ padding: '0px', overflow: 'hidden' }" shadow="hover">
@@ -22,6 +24,7 @@ export default {
 
   data() {
     return {
+      input: "",
       projects: [],
     };
   },
@@ -54,30 +57,29 @@ body {
 }
 
 .app__header {
-  position: relative;
+  padding: 0 12px;
   width: 100%;
-  height: 40vh;
-
+  height: 60px;
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  background-image: url("https://blog.kyuchan.cn/img/home-bg.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  font-size: 80px;
-  color: #fff;
+  justify-content: space-between;
+  
+  font-size: 14px;
   font-weight: 600;
+  color: #fff;
+
+  box-sizing: border-box;
+  background-color: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.01), 0 3px 6px 3px rgba(0,0,0,.01), 0 2px 6px 0 rgba(0,0,0,.03);
 
   .avatar {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     cursor: pointer;
+  }
+
+  .search-input {
+    width: 200px;
   }
 }
 
