@@ -30,7 +30,7 @@ export default {
   },
 
   beforeCreate() {
-    fetch("https://api.jsonbin.io/b/5e2717ef8d761771cc94f795")
+    fetch("https://api.jsonbin.io/b/5e367fd850a7fe418c5825f8")
       .then(res => res.json())
       .then(({ data }) => this.projects = data)
   },
