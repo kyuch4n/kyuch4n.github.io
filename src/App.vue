@@ -32,7 +32,7 @@ export default {
   beforeCreate() {
     fetch("https://api.myjson.com/bins/p9nkm")
       .then(res => res.json())
-      .then(({ data }) => this.projects = data)
+      .then((res) => this.projects = res)
   },
 
   methods: {
