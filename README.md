@@ -32,4 +32,4 @@ yarn run lint
 
 ## Contribution
 
-[jsonbin.io](https://jsonbin.io/dashboard)
+[myjson](http://myjson.com/)
