@@ -4,8 +4,6 @@
 
 ## Site
 
-[blog](https://b.kyuchan.cn)
-
 [github](https://github.com/kyuch4n)
 
 ## Install
