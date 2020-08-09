@@ -1,35 +1,23 @@
-# kyuch4n.github.io
+# Blog
 
-## Project setup
+> My Personal Blog
 
-``` bash
-yarn install
-```
+## Site
 
-### Compiles and hot-reloads for development
+[blog](https://b.kyuchan.cn)
 
-``` bash
-yarn run serve
-```
+[github](https://github.com/kyuch4n)
 
-### Compiles and minifies for production
+## Install
 
-``` bash
-yarn run build
-```
-
-### Run your tests
-
-``` bash
-yarn run test
-```
-
-### Lints and fixes files
-
-``` bash
-yarn run lint
+``` Shell
+> git clone
+> cd
+> jekyll serve --watch
 ```
 
 ## Contribution
 
-[myjson](http://myjson.com/)
+[Huxpro](https://github.com/Huxpro)
+
+[boilerplate](https://github.com/huxpro/huxpro.github.io/)

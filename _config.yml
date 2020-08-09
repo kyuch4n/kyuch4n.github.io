@@ -1,0 +1,29 @@
+title: Blog
+SEOTitle: kyuchanの博客
+header-img: img/home-bg.jpg
+email: qq950810@gmail.com
+description: "这里是 @kyuchan 的个人博客，与你一起发现更大的世界。"
+keyword: "kyuchan, kyuch4n, Blog, 博客, 个人网站, 互联网, 前端"
+url: https://b.kyuchan.cn
+codingurl: http://qq950810.coding.me
+baseurl: ""
+
+
+mail_address:       qq950810@gmail.com
+weibo_username:     kyuch4n
+zhihu_username:     kyuchan
+github_username:    kyuch4n
+
+
+highlighter: rouge
+permalink: pretty
+paginate: 5
+exclude: []
+
+
+plugins: [jekyll-paginate]
+
+
+markdown: kramdown
+kramdown:
+  input: GFM
