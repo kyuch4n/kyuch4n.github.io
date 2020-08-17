@@ -65,7 +65,7 @@ something last;
 ```piglet
 if (a) {
   something for A;
-} else if (b) {
+} elif (b) {
   something for B;
 } else {
   something else;

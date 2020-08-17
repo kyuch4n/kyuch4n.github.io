@@ -32,7 +32,7 @@ Piglet is an extremely simple language to describe flow.
 | :------ | :---------- |
 | break   | Terminates a switch or a loop |
 | continue | Jumps out of a loop and starts at the top |
-| if ... else if ... else | Marks a block of statements to be executed, depending on a condition |
+| if ... elif ... else | Marks a block of statements to be executed, depending on a condition |
 | switch ... case | Marks a block of statements to be executed, depending on different cases |
 | do ... while | Executes a block of statements, and repeats the block, while a condition is true |
 | while ... | While a condition is true, executes a block of statements, and repeats the block |
@@ -77,7 +77,7 @@ Piglet has the following conditional statements:
 
 - Use if to specify a block of code to be executed, if a specified condition is true
 - Use else to specify a block of code to be executed, if the same condition is false
-- Use else if to specify a new condition to test, if the first condition is false
+- Use elif to specify a new condition to test, if the first condition is false
 - Use switch to specify many alternative blocks of code to be executed
 
 ### 2.4 Switch

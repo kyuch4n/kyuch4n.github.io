@@ -94,7 +94,7 @@ Token { type: 'punctuation', value: ';' }
 ```piglet
 if (a) {
   something for A;
-} else if (b) {
+} elif (b) {
   something for B;
 } else {
   something else;
@@ -114,8 +114,7 @@ Token { type: 'punctuation', value: '{' },
 Token { type: 'node', value: 'something for A' },
 Token { type: 'punctuation', value: ';' },
 Token { type: 'punctuation', value: '}' },
-Token { type: 'keyword', value: 'else' },
-Token { type: 'keyword', value: 'if' },
+Token { type: 'keyword', value: 'elif' },
 Token { type: 'punctuation', value: '(' },
 Token { type: 'node', value: 'b' },
 Token { type: 'punctuation', value: ')' },
