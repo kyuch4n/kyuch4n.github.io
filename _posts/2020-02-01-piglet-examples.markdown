@@ -1,15 +1,14 @@
 ---
-layout:     post
-title:      "Piglet Part1 - Examples"
-subtitle:   "A language named Piglet to describe the flow chart"
-date:       2020-02-01
-author:     "kyuchan"
+layout: post
+title: "Piglet Part1 - Examples"
+subtitle: "A language named Piglet to describe the flow chart"
+date: 2020-02-01
+author: "kyuchan"
 header-img: "img/post-bg.jpg"
 tags:
-    - language
-    - typescript
-    - tokenizer
-    - parser
+  - language
+  - tokenizer
+  - parser
 ---
 
 # Examples

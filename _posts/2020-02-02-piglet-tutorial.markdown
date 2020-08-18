@@ -1,15 +1,14 @@
 ---
-layout:     post
-title:      "Piglet Part2 - Tutorial"
-subtitle:   "A language named Piglet to describe the flow chart"
-date:       2020-02-02
-author:     "kyuchan"
+layout: post
+title: "Piglet Part2 - Tutorial"
+subtitle: "A language named Piglet to describe the flow chart"
+date: 2020-02-02
+author: "kyuchan"
 header-img: "img/post-bg.jpg"
 tags:
-    - language
-    - typescript
-    - tokenizer
-    - parser
+  - language
+  - tokenizer
+  - parser
 ---
 
 # Tutorial
@@ -28,14 +27,14 @@ Piglet is an extremely simple language to describe flow.
 
 #### 2.1.1 Piglet Keywords
 
-| Keyword | Description |
-| :------ | :---------- |
-| break   | Terminates a switch or a loop |
-| continue | Jumps out of a loop and starts at the top |
-| if ... elif ... else | Marks a block of statements to be executed, depending on a condition |
-| switch ... case | Marks a block of statements to be executed, depending on different cases |
-| do ... while | Executes a block of statements, and repeats the block, while a condition is true |
-| while ... | While a condition is true, executes a block of statements, and repeats the block |
+| Keyword              | Description                                                                      |
+| :------------------- | :------------------------------------------------------------------------------- |
+| break                | Terminates a switch or a loop                                                    |
+| continue             | Jumps out of a loop and starts at the top                                        |
+| if ... elif ... else | Marks a block of statements to be executed, depending on a condition             |
+| switch ... case      | Marks a block of statements to be executed, depending on different cases         |
+| do ... while         | Executes a block of statements, and repeats the block, while a condition is true |
+| while ...            | While a condition is true, executes a block of statements, and repeats the block |
 
 #### 2.1.2 Semicolons
 
