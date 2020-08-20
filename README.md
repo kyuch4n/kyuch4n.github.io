@@ -8,14 +8,10 @@
 
 ## Install
 
-``` Shell
+```shell
 > git clone
 > cd
 > jekyll serve --watch
 ```
 
 ## Contribution
-
-[Huxpro](https://github.com/Huxpro)
-
-[boilerplate](https://github.com/huxpro/huxpro.github.io/)
