@@ -4,7 +4,7 @@
 
 ## Site
 
-[github](https://github.com/kyuch4n)
+[传送门](https://kyuch4n.github.io/)
 
 ## Install
 
@@ -13,5 +13,3 @@
 > cd
 > jekyll serve --watch
 ```
-
-## Contribution
