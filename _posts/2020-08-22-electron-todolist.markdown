@@ -7,5 +7,5 @@ author: "kyuchan"
 header-img: "img/post-bg.jpg"
 tags:
   - electron
-  - todolist
+  - app
 ---
