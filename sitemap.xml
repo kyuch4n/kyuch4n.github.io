@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+
+<url>
+ <loc>https://kyuch4n.github.io/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-9-19</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://kyuch4n.github.io/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-9-19</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://kyuch4n.github.io/tags/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-9-19</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://kyuch4n.github.io/2020/09/19/sth-about-beforeunload/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-9-19</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://kyuch4n.github.io/2020/08/22/electron-todolist/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-9-19</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://kyuch4n.github.io/2020/02/04/piglet-ast/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-9-19</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://kyuch4n.github.io/2020/02/03/piglet-tokens/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-9-19</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://kyuch4n.github.io/2020/02/02/piglet-tutorial/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-9-19</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://kyuch4n.github.io/page2</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-9-19</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://zhihu.com/people/kyuchan</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-9-19</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+</urlset>
