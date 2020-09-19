@@ -143,6 +143,9 @@ pre code {
   white-space: pre;
   word-wrap: normal;
 }
+.post-container {
+  font-weight: 200;
+}
 .post-container a {
   color: #337ab7;
 }
@@ -460,7 +463,7 @@ pre code {
   margin-top: -5px;
 }
 .intro-header .post-heading .meta {
-  font-family: 'Lora', 'Times New Roman', serif;
+  font-family: -apple-system, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
   font-weight: 300;
   font-size: 18px;
 }
@@ -500,9 +503,10 @@ pre code {
   margin-bottom: 10px;
 }
 .post-preview > .post-meta {
-  font-family: 'Lora', 'Times New Roman', serif;
+  font-family: -apple-system, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
   color: #808080;
   font-size: 16px;
+  font-weight: 200;
   margin-top: 0;
 }
 .post-preview > .post-meta > a {
@@ -529,6 +533,7 @@ pre code {
 }
 .post-content-preview {
   font-size: 13px;
+  font-weight: 200;
   color: #a3a3a3;
 }
 .post-content-preview:hover {

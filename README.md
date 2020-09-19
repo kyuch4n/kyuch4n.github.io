@@ -9,6 +9,11 @@
 ## Install
 
 ```shell
+> gem install jekyll
+> gem install jekyll-paginate
+```
+
+```shell
 > git clone
 > cd
 > jekyll serve --watch
