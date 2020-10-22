@@ -1,12 +1,12 @@
-# Blog
+# BLOG
 
 > My Personal Blog
 
-## Site
+## SITE
 
 [传送门](https://kyuch4n.github.io/)
 
-## Install
+## INSTALL
 
 ```shell
 > gem install jekyll
@@ -19,7 +19,7 @@
 > jekyll serve --watch
 ```
 
-## Sitemap
+## SITEMAP
 
 [SiteMap 网站地图爬虫在线工具](https://help.bj.cn/)
 

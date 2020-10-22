@@ -4,7 +4,7 @@ title: "Electron 实现 ToDoList"
 subtitle: ""
 date: 2020-08-22
 author: "kyuchan"
-header-img: "img/post-bg.jpg"
+header-img: "img/post.jpg"
 tags:
   - electron
   - react

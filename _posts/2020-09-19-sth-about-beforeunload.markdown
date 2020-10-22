@@ -4,7 +4,7 @@ title: "关于 beforeunload/unload 的二三事"
 subtitle: ""
 date: 2020-09-19
 author: "kyuchan"
-header-img: "img/post-bg.jpg"
+header-img: "img/post.jpg"
 tags:
   - beforeunload
   - unload
