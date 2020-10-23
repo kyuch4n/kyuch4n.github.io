@@ -1,2 +1,19 @@
-/_site
-/.jekyll-cache
+# dependencies
+/node_modules
+/npm-debug.log*
+/yarn-error.log
+/yarn.lock
+/package-lock.json
+
+# build
+/build
+
+# pangu
+/packages/pangu/_site
+/packages/pangu/.jekyll-cache
+
+# shennong
+/packages/shennong/src/.umi
+/packages/shennong/src/.umi-production
+/packages/shennong/src/.umi-test
+/packages/shennong/.env.local

@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "shennong",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi generate tmp",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage"
+  },
+  "dependencies": {
+    "@umijs/preset-react": "1.x",
+    "@umijs/test": "^3.2.24",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "umi": "^3.2.24"
+  }
+}

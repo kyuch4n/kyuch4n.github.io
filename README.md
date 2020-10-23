@@ -1,28 +1,34 @@
-# BLOG
+# KYU「Q」
 
-> My Personal Blog
+## Website
 
-## SITE
+[Let's Go →_→](https://kyuch4n.github.io/)
 
-[传送门](https://kyuch4n.github.io/)
+## Packages
 
-## INSTALL
+### 1. Pangu
+
+#### Start up
 
 ```shell
 > gem install jekyll
 > gem install jekyll-paginate
-```
-
-```shell
-> git clone
-> cd
 > jekyll serve --watch
 ```
 
-## SITEMAP
+### 2. shennong
 
-[SiteMap 网站地图爬虫在线工具](https://help.bj.cn/)
+#### Start up
 
+```shell
+> yarn start
 ```
-<lastmod>2020-9-19</lastmod> → <lastmod>2020-09-19</lastmod>
+
+## Scripts
+
+### build.sh
+
+```shell
+> chmod +x scripts/build.sh
+> yarn build
 ```
