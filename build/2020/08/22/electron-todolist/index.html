@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="kyu's personal blog" />
+  <meta name="keyword" content="kyuchan, kyuch4n, blog, fe, 博客, 个人网站, 互联网, 前端" />
+  <!-- 百度站长工具验证 -->
+  <meta name="baidu-site-verification" content="code-2bes95grWe" />
+  <!-- Google Search 工具验证 -->
+  <meta name="google-site-verification" content="LjMTRPYT7DFSO2MiIWUn59U50dUNsk7dcvYew79cfac" />
+  <link rel="shortcut icon" href="/assets/favicon.ico" />
+  <title>Electron 实现 ToDoList - KYU</title>
+  <link rel="canonical" href="https://kyuch4n.github.io/2020/08/22/electron-todolist/" />
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/framework.css" />
+  <!-- Pygments Github CSS -->
+  <link rel="stylesheet" href="/css/syntax.css" />
+  <!-- Custom Fonts -->
+  <link
+    href="https://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <script>
+    console.log("挖藕，你发现了彩蛋！！！！！");
+    console.log(String.raw`
+          _____                _____                    _____          
+         /\    \              |\    \                  /\    \         
+        /::\____\             |:\____\                /::\____\        
+       /:::/    /             |::|   |               /:::/    /        
+      /:::/    /              |::|   |              /:::/    /         
+     /:::/    /               |::|   |             /:::/    /          
+    /:::/____/                |::|   |            /:::/    /           
+   /::::\    \                |::|   |           /:::/    /            
+  /::::::\____\________       |::|___|______    /:::/    /      _____  
+ /:::/\:::::::::::\    \      /::::::::\    \  /:::/____/      /\    \ 
+/:::/  |:::::::::::\____\    /::::::::::\____\|:::|    /      /::\____\
+\::/   |::|~~~|~~~~~        /:::/~~~~/~~      |:::|____\     /:::/    /
+ \/____|::|   |            /:::/    /          \:::\    \   /:::/    / 
+       |::|   |           /:::/    /            \:::\    \ /:::/    /  
+       |::|   |          /:::/    /              \:::\    /:::/    /   
+       |::|   |          \::/    /                \:::\__/:::/    /    
+       |::|   |           \/____/                  \::::::::/    /     
+       |::|   |                                     \::::::/    /      
+       \::|   |                                      \::::/    /       
+        \:|   |                                       \::/____/        
+         \|___|                                        ~~              
+    `);
+  </script>
+  <!-- 百度统计打点 -->
+  <!-- https://tongji.baidu.com/web/10000277564/homepage/index -->
+  <script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?875ba0bb95ae7eb90248d044ccf946de";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+
+  <body ontouchstart="">
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">BLOG</a>
+    </div>
+    <div id="blog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          
+          <li>
+            <a href="/tags/">TAGS</a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  var $body = document.body;
+  var $toggle = document.querySelector(".navbar-toggle");
+  var $navbar = document.querySelector("#blog_navbar");
+  var $collapse = document.querySelector(".navbar-collapse");
+
+  $toggle.addEventListener("click", handleMagic);
+  function handleMagic(e) {
+    if ($navbar.className.indexOf("in") > 0) {
+      $navbar.className = " ";
+      setTimeout(function () {
+        if ($navbar.className.indexOf("in") < 0) {
+          $collapse.style.height = "0px";
+        }
+      }, 400);
+    } else {
+      $collapse.style.height = "auto";
+      $navbar.className += " in";
+    }
+  }
+</script>
+ <style type="text/css">
+  header.intro-header {
+    background-image: url("/assets/post.jpg");
+  }
+</style>
+<header class="intro-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <div class="tags">
+            
+            <a class="tag" href="/tags/#electron" title="electron">electron</a>
+            
+            <a class="tag" href="/tags/#react" title="react">react</a>
+            
+            <a class="tag" href="/tags/#typescript" title="typescript">typescript</a>
+            
+          </div>
+          <h1>Electron 实现 ToDoList</h1>
+           
+          <h2 class="subheading"></h2>
+          
+          <span class="meta"
+            >Posted by kyuchan on August 22, 2020</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+        <h1 id="项目预览">项目预览</h1>
+
+<p><a href="https://github.com/kyuch4n/Neural/releases">Neural - ToDoList for Mac</a></p>
+
+<h1 id="技术选型">技术选型</h1>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 语言</span>
+typescript
+<span class="c"># 框架</span>
+react + electron
+<span class="c"># 组件库</span>
+Antd
+<span class="c"># 存储</span>
+IndexedDB
+</code></pre></div></div>
+
+<h1 id="项目开发">项目开发</h1>
+
+<h2 id="初始化">初始化</h2>
+
+<p>参考 <a href="https://juejin.im/post/6844903555921362952#heading-5">React 结合 Electron</a> 初始化自己的 react 项目。</p>
+
+<h2 id="本地开发">本地开发</h2>
+
+<p>利用 Antd 组件库进行前端开发，提供 todo item 的增删改查功能。</p>
+
+<p>定期巡查，<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Notification">Notify</a> 过期的 todo item。</p>
+
+<h2 id="数据存储">数据存储</h2>
+
+<p>通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API">IndexedDB</a> 做前端存储。存储的数据结构如下：</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">enum</span> <span class="nx">TagStatus</span> <span class="p">{</span>
+  <span class="nx">PENDING</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">pending</span><span class="dl">"</span><span class="p">,</span>
+  <span class="nx">DONE</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">done</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">Tag</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">descriptions</span><span class="p">?:</span> <span class="kr">string</span><span class="p">;</span>
+  <span class="nl">wikis</span><span class="p">?:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="kr">string</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nl">expires</span><span class="p">?:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">status</span><span class="p">?:</span> <span class="nx">TagStatus</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="其他功能">其他功能</h2>
+
+<h3 id="electron-api">Electron API</h3>
+
+<ul>
+  <li>设置托盘（tray）</li>
+  <li>隐藏 docker 图标</li>
+  <li>全局快捷键（globalShortcut）</li>
+  <li>修改窗口关闭事件</li>
+</ul>
+
+<p>将窗口关闭改为隐藏。</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">mainWindow</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">close</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">mainWindow</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="禁止-cmdr-reload">禁止 cmd+r reload</h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">onkeydown</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">ev</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">event</span> <span class="o">||</span> <span class="nx">e</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">code</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">||</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">which</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">((</span><span class="nx">ev</span><span class="p">.</span><span class="nx">ctrlKey</span> <span class="o">||</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">metaKey</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">code</span> <span class="o">===</span> <span class="mi">82</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">"</span><span class="s2">Reload is not allowed!</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="通过窗口抖动进行错误提示">通过窗口抖动进行错误提示</h3>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">shake</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">win</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">remote</span><span class="p">.</span><span class="nx">getCurrentWindow</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">startX</span><span class="p">,</span> <span class="nx">startY</span><span class="p">]</span> <span class="o">=</span> <span class="nx">win</span><span class="p">.</span><span class="nx">getPosition</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">distance</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">moveArrry</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">distance</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">distance</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="nx">distance</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">distance</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">distance</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">5</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="nx">distance</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="nx">distance</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span> <span class="p">},</span>
+  <span class="p">];</span>
+
+  <span class="kd">const</span> <span class="nx">routeArray</span> <span class="o">=</span> <span class="nx">moveArrry</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="na">x</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">startX</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">startY</span> <span class="p">}));</span>
+  <span class="nx">routeArray</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">r</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">win</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">y</span><span class="p">));</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="构建">构建</h2>
+
+<p>修改 package.json electron-builder 配置：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">build</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">appId</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">com.electron.neural</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">productName</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Neural</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">mac</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">icon</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">public/logo512.png</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">category</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">public.app-category.utilities</span><span class="dl">"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>将 dependencies 移至 devDependencies，减少构建后 app 的包体积。</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">dependencies</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">electron-is-dev</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^1.2.0</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">devDependencies</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">@ant-design/icons</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^4.2.1</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">antd</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^4.4.2</span><span class="dl">"</span><span class="p">,</span>
+    <span class="p">...</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>yarn autoclean 进一步优化 node_modules 体积。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn autoclean <span class="nt">--force</span> <span class="o">&amp;&amp;</span> yarn react-build <span class="o">&amp;&amp;</span> yarn electron-build
+</code></pre></div></div>
+
+<h1 id="工作流">工作流</h1>
+
+<p>通过 Github Action 自动构建。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">release</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">master</span><span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build_and_release</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">macos-latest</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Setup node</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-node@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">node-version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">10.x"</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install dependencies</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">npm install yarn -g</span>
+          <span class="s">yarn</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build Application</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">yarn build</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Get Package Version</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">yunree/package-version@v1.0.2</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Create Release</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">create_release</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/create-release@v1</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">tag_name</span><span class="pi">:</span> <span class="s">v$</span>
+          <span class="na">release_name</span><span class="pi">:</span> <span class="s">v$</span>
+          <span class="na">draft</span><span class="pi">:</span> <span class="no">true</span>
+          <span class="na">prerelease</span><span class="pi">:</span> <span class="no">false</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Upload Release Asset</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">upload_release_asset</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/upload-release-asset@v1</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">upload_url</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">asset_path</span><span class="pi">:</span> <span class="s">./dist/Neural-$.dmg</span>
+          <span class="na">asset_name</span><span class="pi">:</span> <span class="s">Neural-$.dmg</span>
+          <span class="na">asset_content_type</span><span class="pi">:</span> <span class="s">application/octet-stream</span>
+</code></pre></div></div>
+ 
+        <hr />
+        <ul class="pager">
+          
+          <li class="previous">
+            <a
+              href="/2020/02/04/piglet-ast/"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Piglet Part4 - AST"
+              >&larr; Previous Post</a
+            >
+          </li>
+           
+          <li class="next">
+            <a
+              href="/2020/09/19/sth-about-beforeunload/"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="关于 beforeunload/unload 的二三事"
+              >Next Post &rarr;</a
+            >
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</article>
+ <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+          
+          <li>
+            <a target="_top" href="mailto:qq950810@gmail.com?subject=Opinion/Advice/Suggestion About Your Blogs">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a target="_blank" href="https://weibo.com/kyuch4n">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a target="_blank" href="https://zhihu.com/people/kyuchan">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-1x fa-inverse">知</i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a target="_blank" href="https://github.com/kyuch4n">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/jquery.js "></script>
+<script src="/js/bootstrap.js "></script>
+<script src="/js/framework.js "></script>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  // only load tagcloud.js in tag.html
+  if($('#tag_cloud').length !== 0){
+    async("/js/jquery.tagcloud.js",function(){
+      $.fn.tagcloud.defaults = {
+        color: {start: '#bbbbee', end: '#0085a1'},
+      };
+      $('#tag_cloud a').tagcloud();
+    })
+  }
+</script>
+<script>
+  async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+      var $nav = document.querySelector("nav");
+      if($nav) FastClick.attach($nav);
+  })
+</script>
+  </body>
+</html>

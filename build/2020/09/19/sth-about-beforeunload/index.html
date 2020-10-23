@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="kyu's personal blog" />
+  <meta name="keyword" content="kyuchan, kyuch4n, blog, fe, 博客, 个人网站, 互联网, 前端" />
+  <!-- 百度站长工具验证 -->
+  <meta name="baidu-site-verification" content="code-2bes95grWe" />
+  <!-- Google Search 工具验证 -->
+  <meta name="google-site-verification" content="LjMTRPYT7DFSO2MiIWUn59U50dUNsk7dcvYew79cfac" />
+  <link rel="shortcut icon" href="/assets/favicon.ico" />
+  <title>关于 beforeunload/unload 的二三事 - KYU</title>
+  <link rel="canonical" href="https://kyuch4n.github.io/2020/09/19/sth-about-beforeunload/" />
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/framework.css" />
+  <!-- Pygments Github CSS -->
+  <link rel="stylesheet" href="/css/syntax.css" />
+  <!-- Custom Fonts -->
+  <link
+    href="https://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <script>
+    console.log("挖藕，你发现了彩蛋！！！！！");
+    console.log(String.raw`
+          _____                _____                    _____          
+         /\    \              |\    \                  /\    \         
+        /::\____\             |:\____\                /::\____\        
+       /:::/    /             |::|   |               /:::/    /        
+      /:::/    /              |::|   |              /:::/    /         
+     /:::/    /               |::|   |             /:::/    /          
+    /:::/____/                |::|   |            /:::/    /           
+   /::::\    \                |::|   |           /:::/    /            
+  /::::::\____\________       |::|___|______    /:::/    /      _____  
+ /:::/\:::::::::::\    \      /::::::::\    \  /:::/____/      /\    \ 
+/:::/  |:::::::::::\____\    /::::::::::\____\|:::|    /      /::\____\
+\::/   |::|~~~|~~~~~        /:::/~~~~/~~      |:::|____\     /:::/    /
+ \/____|::|   |            /:::/    /          \:::\    \   /:::/    / 
+       |::|   |           /:::/    /            \:::\    \ /:::/    /  
+       |::|   |          /:::/    /              \:::\    /:::/    /   
+       |::|   |          \::/    /                \:::\__/:::/    /    
+       |::|   |           \/____/                  \::::::::/    /     
+       |::|   |                                     \::::::/    /      
+       \::|   |                                      \::::/    /       
+        \:|   |                                       \::/____/        
+         \|___|                                        ~~              
+    `);
+  </script>
+  <!-- 百度统计打点 -->
+  <!-- https://tongji.baidu.com/web/10000277564/homepage/index -->
+  <script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?875ba0bb95ae7eb90248d044ccf946de";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+
+  <body ontouchstart="">
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">BLOG</a>
+    </div>
+    <div id="blog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          
+          <li>
+            <a href="/tags/">TAGS</a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  var $body = document.body;
+  var $toggle = document.querySelector(".navbar-toggle");
+  var $navbar = document.querySelector("#blog_navbar");
+  var $collapse = document.querySelector(".navbar-collapse");
+
+  $toggle.addEventListener("click", handleMagic);
+  function handleMagic(e) {
+    if ($navbar.className.indexOf("in") > 0) {
+      $navbar.className = " ";
+      setTimeout(function () {
+        if ($navbar.className.indexOf("in") < 0) {
+          $collapse.style.height = "0px";
+        }
+      }, 400);
+    } else {
+      $collapse.style.height = "auto";
+      $navbar.className += " in";
+    }
+  }
+</script>
+ <style type="text/css">
+  header.intro-header {
+    background-image: url("/assets/post.jpg");
+  }
+</style>
+<header class="intro-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <div class="tags">
+            
+            <a class="tag" href="/tags/#beforeunload" title="beforeunload">beforeunload</a>
+            
+            <a class="tag" href="/tags/#unload" title="unload">unload</a>
+            
+            <a class="tag" href="/tags/#eventlistener" title="eventlistener">eventlistener</a>
+            
+          </div>
+          <h1>关于 beforeunload/unload 的二三事</h1>
+           
+          <h2 class="subheading"></h2>
+          
+          <span class="meta"
+            >Posted by kyuchan on September 19, 2020</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+        <p>在开发中我们也许会遇到这样的需求：即在用户离开当前页面的时候发送请求或者打点。自然我们需要对页面的 beforeunload/unload 事件去做一些事件监听。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">unload</span><span class="dl">"</span><span class="p">,</span> <span class="nx">log</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>事实上，由于页面已经被用户关闭了，你的请求可能并没有成功发送（Canceled）。</p>
+
+<p>如果对于浏览器的兼容性没有什么要求的话，不妨可以尝试一下 <code class="language-plaintext highlighter-rouge">navigator.sendBeacon</code> 这个 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator/sendBeacon">API</a>。</p>
+
+<blockquote>
+  <p>备注：在 unload 或者 beforeunload 事件处理器中发起一个同步 XMLHttpRequest 来发送数据已经不被 Chrome 支持（同步的 xhr 请求会阻塞页面关闭，带来不好的用户体验）。</p>
+</blockquote>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nb">navigator</span><span class="p">.</span><span class="nx">sendBeacon</span><span class="p">(</span><span class="dl">"</span><span class="s2">/log</span><span class="dl">"</span><span class="p">,</span> <span class="nx">analyticsData</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">unload</span><span class="dl">"</span><span class="p">,</span> <span class="nx">log</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h1 id="confirm-dialog">Confirm dialog</h1>
+
+<p><img width="300" src="https://kyuch4n.github.io/assets/beforeunload-dialog.png" /></p>
+
+<p>如果用户此时正在编辑一些重要的信息，希望在用户离开或者刷新页面前进行二次确认，这又该如何呢？我们还可以监听 beforeunload 事件弹出确认对话框。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">beforeunload</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Cancel the event as stated by the standard.</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+  <span class="c1">// Chrome requires returnValue to be set.</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>同时在 unload 事件回调里通过 <code class="language-plaintext highlighter-rouge">navigator.sendBeacon</code> 发送请求。</p>
+
+<h1 id="further-more">Further more</h1>
+
+<p>如果我们对于浏览器的兼容性还要有一定要求的（不能直接使用 sendBeacon API），或者在发送离开页面的请求之后我们还需要做一些请求的回调处理怎么办 😰？</p>
+
+<p>无奈之下我们只能<strong>将请求置于 beforeunload 的事件回调之中</strong>。这样，在弹窗进行二次确认的时请求会正常发送，而<strong>在 unload 执行前的事件循环里面执行请求的回调</strong>。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">beforeunload</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Cancel the event as stated by the standard.</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+  <span class="c1">// Ajax</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+    <span class="c1">// options</span>
+  <span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// 回调处理</span>
+    <span class="c1">// do sth....</span>
+  <span class="p">});</span>
+
+  <span class="c1">// Chrome requires returnValue to be set.</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h1 id="another-question">Another question</h1>
+
+<p>不幸的是，这也引入了新的问题：<strong>用户取消/确定，没有回调 API，无法得知</strong>。于是即便用户取消了关闭操作、停留在当前页面，仍旧会发送请求、触发回调。</p>
+
+<p>如果你的请求是可以被 <strong>revert</strong> 的（A → B → A），那我们还可以通过一些小 <strong>trick</strong> 判断出用户仍然停留在当前页面，从而重置状态。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">beforeunload</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Cancel the event as stated by the standard.</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+  <span class="c1">// Ajax</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+    <span class="c1">// options</span>
+  <span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// 回调处理</span>
+    <span class="c1">// do sth...</span>
+  <span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// revert</span>
+      <span class="c1">// do sth...</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="c1">// Chrome requires returnValue to be set.</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>如果用户停留在了当前页面，在用户取消了弹窗的 1s 后，我们的 setTimeout 逻辑将会触发，这时我们可以进行请求的 revert；如果用户选择了离开，则不会触发 setTimeout 逻辑。</p>
+
+<h1 id="at-last">At last</h1>
+
+<p>不幸的是，如果请求无法被 revert，而离开时的需求逻辑又比较复杂，我也暂时没想到什么特别好的方法。（不如考虑改一下产品逻辑……</p>
+ 
+        <hr />
+        <ul class="pager">
+          
+          <li class="previous">
+            <a
+              href="/2020/08/22/electron-todolist/"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Electron 实现 ToDoList"
+              >&larr; Previous Post</a
+            >
+          </li>
+           
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</article>
+ <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+          
+          <li>
+            <a target="_top" href="mailto:qq950810@gmail.com?subject=Opinion/Advice/Suggestion About Your Blogs">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a target="_blank" href="https://weibo.com/kyuch4n">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a target="_blank" href="https://zhihu.com/people/kyuchan">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-1x fa-inverse">知</i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a target="_blank" href="https://github.com/kyuch4n">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/jquery.js "></script>
+<script src="/js/bootstrap.js "></script>
+<script src="/js/framework.js "></script>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  // only load tagcloud.js in tag.html
+  if($('#tag_cloud').length !== 0){
+    async("/js/jquery.tagcloud.js",function(){
+      $.fn.tagcloud.defaults = {
+        color: {start: '#bbbbee', end: '#0085a1'},
+      };
+      $('#tag_cloud a').tagcloud();
+    })
+  }
+</script>
+<script>
+  async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+      var $nav = document.querySelector("nav");
+      if($nav) FastClick.attach($nav);
+  })
+</script>
+  </body>
+</html>
