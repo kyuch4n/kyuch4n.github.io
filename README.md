@@ -26,7 +26,7 @@
 
 ## Scripts
 
-### build.sh
+### 1. build.sh
 
 ```shell
 > chmod +x scripts/build.sh
