@@ -4,7 +4,7 @@ title: "Piglet Part4 - AST"
 subtitle: "A language named Piglet to describe the flow chart"
 date: 2020-02-04
 author: "kyuchan"
-header-img: "img/post.jpg"
+header-img: "assets/post.jpg"
 tags:
   - language
   - tokenizer

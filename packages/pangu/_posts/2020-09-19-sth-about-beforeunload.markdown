@@ -4,7 +4,7 @@ title: "关于 beforeunload/unload 的二三事"
 subtitle: ""
 date: 2020-09-19
 author: "kyuchan"
-header-img: "img/post.jpg"
+header-img: "assets/post.jpg"
 tags:
   - beforeunload
   - unload
@@ -35,7 +35,7 @@ window.addEventListener("unload", log, false);
 
 # Confirm dialog
 
-<img width="300" src="{{ site.url }}/img/assets/beforeunload-dialog.png" />
+<img width="300" src="{{ site.url }}/assets/beforeunload-dialog.png" />
 
 如果用户此时正在编辑一些重要的信息，希望在用户离开或者刷新页面前进行二次确认，这又该如何呢？我们还可以监听 beforeunload 事件弹出确认对话框。
 

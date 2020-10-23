@@ -1,15 +1,27 @@
-# umi project
+# KYU「Q」
 
-## Getting Started
+## Website
 
-Install dependencies,
+[Let's Go →_→](https://kyuch4n.github.io/)
 
-```bash
-$ yarn
+## Packages
+
+### 1. Pangu
+
+#### Start up
+
+```shell
+> gem install jekyll
+> gem install jekyll-paginate
+> jekyll serve --watch
 ```
 
-Start the dev server,
+### 2. shennong
 
-```bash
-$ yarn start
+#### Start up
+
+```shell
+> yarn start
 ```
+
+## Scripts
