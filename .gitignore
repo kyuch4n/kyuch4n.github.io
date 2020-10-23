@@ -5,6 +5,9 @@
 /yarn.lock
 /package-lock.json
 
+# build
+/build
+
 # pangu
 /packages/pangu/_site
 /packages/pangu/.jekyll-cache

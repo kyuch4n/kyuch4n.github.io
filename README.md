@@ -25,3 +25,10 @@
 ```
 
 ## Scripts
+
+### build.sh
+
+```shell
+> chmod +x scripts/build.sh
+> yarn build
+```
