@@ -1,8 +1,6 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  nodeModulesTransform: {
-    type: 'none',
-  },
+  publicPath: '/lab/',
   routes: [{ path: '/', component: '@/pages/index' }],
 });

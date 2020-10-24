@@ -10,3 +10,10 @@ cd $CWD/packages/pangu
 yarn build
 # Copy Build Files
 cp -rf _site $CWD/build
+
+# Shennong
+# Build
+cd $CWD/packages/shennong
+yarn build
+# Copy Build Files
+cp -rf dist $CWD/build/lab
