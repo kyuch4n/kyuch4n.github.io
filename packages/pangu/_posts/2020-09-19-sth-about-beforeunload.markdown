@@ -7,8 +7,6 @@ author: "kyuchan"
 header-img: "assets/post.jpg"
 tags:
   - beforeunload
-  - unload
-  - eventlistener
 ---
 
 在开发中我们也许会遇到这样的需求：即在用户离开当前页面的时候发送请求或者打点。自然我们需要对页面的 beforeunload/unload 事件去做一些事件监听。
