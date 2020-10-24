@@ -1,6 +1,6 @@
 import React from 'react';
-import './index.css';
+import Spooky from '@/components/spooky';
 
 export default () => {
-  return <span>SPOOKY</span>;
+  return <Spooky></Spooky>;
 };
