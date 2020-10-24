@@ -3,7 +3,7 @@
   "scripts": {
     "build": "./scripts/build.sh",
     "deploy": "gh-pages -d build",
-    "build+deploy": "npm-run-all build deploy"
+    "build+deploy": "run-s build deploy"
   },
   "workspaces": [
     "packages/*"

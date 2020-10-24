@@ -4,7 +4,7 @@ layout: default
 
 <style type="text/css">
   header.intro-header {
-    background-image: url("{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}");
+    background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');
   }
 </style>
 <header class="intro-header">
@@ -14,17 +14,20 @@ layout: default
         <div class="post-heading">
           <div class="tags">
             {% for tag in page.tags %}
-            <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
+            <a
+              class="tag"
+              href="{{ site.baseurl }}/tags/#{{ tag }}"
+              title="{{ tag }}"
+              >{{ tag }}</a
+            >
             {% endfor %}
           </div>
           <h1>{{ page.title }}</h1>
-          {% comment %} always create a h2 for keeping the margin , Hux {% endcomment %} {% comment %} if page.subtitle
-          {% endcomment %}
           <h2 class="subheading">{{ page.subtitle }}</h2>
-          {% comment %} endif {% endcomment %}
           <span class="meta"
-            >Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date |
-            date: "%B %-d, %Y" }}</span
+            >Posted by {% if page.author %}{{ page.author }}{% else %}{{
+            site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y"
+            }}</span
           >
         </div>
       </div>
@@ -34,7 +37,9 @@ layout: default
 <article>
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+      <div
+        class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container"
+      >
         {{ content }} {% if page.previous.url || page.next.url %}
         <hr />
         <ul class="pager">
