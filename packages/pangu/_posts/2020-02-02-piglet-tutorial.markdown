@@ -4,7 +4,6 @@ title: "Piglet Part2 - Tutorial"
 subtitle: "A language named Piglet to describe the flow chart"
 date: 2020-02-02
 author: "kyuchan"
-header-img: "assets/post.jpg"
 tags:
   - piglet
 ---

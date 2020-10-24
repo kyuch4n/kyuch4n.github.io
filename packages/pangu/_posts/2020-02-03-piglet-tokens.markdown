@@ -4,7 +4,6 @@ title: "Piglet Part3 - Tokens"
 subtitle: "A language named Piglet to describe the flow chart"
 date: 2020-02-03
 author: "kyuchan"
-header-img: "assets/post.jpg"
 tags:
   - piglet
 ---
