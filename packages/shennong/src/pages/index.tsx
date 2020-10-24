@@ -1,6 +1,16 @@
 import React from 'react';
-import Spooky from '@/components/spooky';
+import Unlock from '@/components/unlock';
+import './index.css';
 
 export default () => {
-  return <Spooky></Spooky>;
+  return (
+    <div className="index-page-container">
+      <div id="spooky-container">
+        <span style={{ visibility: 'hidden' }}>SP</span>
+        OO
+        <span style={{ visibility: 'hidden' }}>KY</span>
+      </div>
+      <Unlock></Unlock>
+    </div>
+  );
 };
