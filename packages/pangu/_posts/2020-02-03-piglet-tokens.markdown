@@ -6,9 +6,7 @@ date: 2020-02-03
 author: "kyuchan"
 header-img: "assets/post.jpg"
 tags:
-  - language
-  - tokenizer
-  - parser
+  - piglet
 ---
 
 # Tokens

@@ -7,8 +7,6 @@ author: "kyuchan"
 header-img: "assets/post.jpg"
 tags:
   - electron
-  - react
-  - typescript
 ---
 
 # 项目预览

@@ -10,15 +10,21 @@
 
 #### Start up
 
+Install jekyll and jekyll plugins. And run `yarn start` to develop.
+
 ```shell
 > gem install jekyll
 > gem install jekyll-paginate
-> jekyll serve --watch
+> yarn start
 ```
+
+View [http://127.0.0.1:4000/](http://127.0.0.1:4000/).
 
 ### 2. shennong
 
 #### Start up
+
+A umi project, see more detail at [Umi 官方文档](https://umijs.org/zh-CN/docs).
 
 ```shell
 > yarn start
@@ -30,5 +36,10 @@
 
 ```shell
 > chmod +x scripts/build.sh
+```
+
+```shell
 > yarn build
 ```
+
+Run `yarn build` at root dir, will auto build sub-packages and deploy on github.
