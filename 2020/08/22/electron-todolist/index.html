@@ -9,31 +9,50 @@
   <!-- 百度站长工具验证 -->
   <meta name="baidu-site-verification" content="code-2bes95grWe" />
   <!-- Google Search 工具验证 -->
-  <meta
-    name="google-site-verification"
-    content="LjMTRPYT7DFSO2MiIWUn59U50dUNsk7dcvYew79cfac"
-  />
-  <link rel="shortcut icon" href="/assets/favicon.ico" />
+  <meta name="google-site-verification" content="LjMTRPYT7DFSO2MiIWUn59U50dUNsk7dcvYew79cfac" />
   <title>
-    Electron 实现 ToDoList - KYU
+    
+      Electron 实现 ToDoList - KYU
+    
   </title>
-  <link
-    rel="canonical"
-    href="https://kyuch4n.github.io/2020/08/22/electron-todolist/"
-  />
+
+  <link rel="shortcut icon" href="/assets/favicon.ico" />
+  <link rel="canonical" href="https://kyuch4n.github.io/2020/08/22/electron-todolist/" />
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.css" />
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="/css/framework.css" />
   <!-- Pygments Github CSS -->
-  <link rel="stylesheet" href="/css/syntax.css"
-  />
+  <link rel="stylesheet" href="/css/syntax.css" />
   <!-- Custom Fonts -->
-  <link
-    href="https://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css"
-    rel="stylesheet"
-    type="text/css"
-  />
+  <link href="https://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <!-- Custom CSS -->
+  <!-- WARNING: Must after bootstrap.css to cover style -->
+  <link rel="stylesheet" href="/css/framework.css" />
+  <!-- Preload Img -->
+  <link rel="preload" href="/assets/home.jpg" as="image">
+  <link rel="preload" href="/assets/post.jpg" as="image">
+  <link rel="preload" href="/assets/tags.jpg" as="image">
+  <link rel="preload" href="/assets/404.jpg" as="image">
+
+
+  <!-- 百度统计打点 -->
+  <!-- https://tongji.baidu.com/web/10000277564/homepage/index -->
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement('script');
+      hm.src = 'https://hm.baidu.com/hm.js?875ba0bb95ae7eb90248d044ccf946de';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+  <!-- Prefetch By Google QuickLink -->
+  <script src="https://unpkg.com/quicklink"></script>
+  <script>
+    window.addEventListener('load', () => {
+      quicklink.listen();
+    });
+  </script>
+  <!-- 彩蛋 -->
   <script>
     console.log('挖藕，你发现了彩蛋！！！！！');
     console.log(String.raw`
@@ -59,17 +78,6 @@
         \:|   |                                       \::/____/        
          \|___|                                        ~~              
     `);
-  </script>
-  <!-- 百度统计打点 -->
-  <!-- https://tongji.baidu.com/web/10000277564/homepage/index -->
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement('script');
-      hm.src = 'https://hm.baidu.com/hm.js?875ba0bb95ae7eb90248d044ccf946de';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
   </script>
 </head>
 
@@ -144,9 +152,13 @@
           </div>
           <h1>Electron 实现 ToDoList</h1>
           <h2 class="subheading"></h2>
-          <span class="meta"
-            >Posted by kyuchan on August 22, 2020</span
-          >
+          <span class="meta">
+            Posted by
+            
+              kyuchan
+            
+            on August 22, 2020
+          </span>
         </div>
       </div>
     </div>
@@ -351,7 +363,7 @@ IndexedDB
           
           <li class="previous">
             <a
-              href="/2020/02/04/piglet-ast/"
+              href="/2020/02/01/piglet-04/"
               data-toggle="tooltip"
               data-placement="top"
               title="Piglet Part4 - AST"

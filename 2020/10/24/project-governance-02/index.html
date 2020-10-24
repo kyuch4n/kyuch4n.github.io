@@ -12,11 +12,12 @@
   <meta name="google-site-verification" content="LjMTRPYT7DFSO2MiIWUn59U50dUNsk7dcvYew79cfac" />
   <title>
     
-      KYU
+      [WIP]「BLOG」项目治理 (下) - 性能优化 - KYU
+    
   </title>
 
   <link rel="shortcut icon" href="/assets/favicon.ico" />
-  <link rel="canonical" href="https://kyuch4n.github.io/" />
+  <link rel="canonical" href="https://kyuch4n.github.io/2020/10/24/project-governance-02/" />
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.css" />
   <!-- Pygments Github CSS -->
@@ -129,199 +130,73 @@
     }
   }
 </script>
- <header
-  class="intro-header"
-  style="background-image: url('/assets/home.jpg')"
->
+ <style type="text/css">
+  header.intro-header {
+    background-image: url('/assets/post.jpg');
+  }
+</style>
+<header class="intro-header">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="site-heading">
-          <h1>
-            BLOG
-          </h1>
-          <span class="subheading">BE A COOL GUY</span>
+        <div class="post-heading">
+          <div class="tags">
+            
+            <a
+              class="tag"
+              href="/tags/#performance optimization"
+              title="performance optimization"
+              >performance optimization</a
+            >
+            
+          </div>
+          <h1>[WIP]「BLOG」项目治理 (下) - 性能优化</h1>
+          <h2 class="subheading"></h2>
+          <span class="meta">
+            Posted by
+            
+              kyuchan
+            
+            on October 24, 2020
+          </span>
         </div>
       </div>
     </div>
   </div>
 </header>
-<div class="container">
-  <div class="row">
-    <div
-      class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container"
-    >
-      
-<div class="post-preview">
-  <a href="/2020/10/24/project-governance-02/">
-    <h2 class="post-title">
-      [WIP]「BLOG」项目治理 (下) - 性能优化
-    </h2>
-    
-    <h3 class="post-subtitle">
-      
-    </h3>
-    
-    <div class="post-content-preview">
-      TO BE CONTINUS …
+<article>
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container"
+      >
+        <p>TO BE CONTINUS …</p>
 
-
-  CDN
-  Preload、Prefetch
-  SW
-
-
-    </div>
-  </a>
-  <p class="post-meta">
-    Posted by kyuchan on October 24, 2020
-  </p>
-</div>
-<hr>
-
-<div class="post-preview">
-  <a href="/2020/10/24/project-governance-01/">
-    <h2 class="post-title">
-      [WIP]「BLOG」项目治理 (上) - 工程化
-    </h2>
-    
-    <h3 class="post-subtitle">
-      
-    </h3>
-    
-    <div class="post-content-preview">
-      TO BE CONTINUS …
-
-
-  monorepo
-  lint、prettier
-  packages instruction
-  scripts
-
-
-    </div>
-  </a>
-  <p class="post-meta">
-    Posted by kyuchan on October 24, 2020
-  </p>
-</div>
-<hr>
-
-<div class="post-preview">
-  <a href="/2020/09/19/sth-about-beforeunload/">
-    <h2 class="post-title">
-      关于 beforeunload/unload 的二三事
-    </h2>
-    
-    <h3 class="post-subtitle">
-      
-    </h3>
-    
-    <div class="post-content-preview">
-      在开发中我们也许会遇到这样的需求：即在用户离开当前页面的时候发送请求或者打点。自然我们需要对页面的 beforeunload/unload 事件去做一些事件监听。
-
-function log() {
-  $.ajax();
-}
-window.addEventListener("unload", log, false);
-
-
-事实上，由于页面已经被用户关闭了，你的请求可能并没有成功发送（Can...
-    </div>
-  </a>
-  <p class="post-meta">
-    Posted by kyuchan on September 19, 2020
-  </p>
-</div>
-<hr>
-
-<div class="post-preview">
-  <a href="/2020/08/22/electron-todolist/">
-    <h2 class="post-title">
-      Electron 实现 ToDoList
-    </h2>
-    
-    <h3 class="post-subtitle">
-      
-    </h3>
-    
-    <div class="post-content-preview">
-      项目预览
-
-Neural - ToDoList for Mac
-
-技术选型
-
-# 语言
-typescript
-# 框架
-react + electron
-# 组件库
-Antd
-# 存储
-IndexedDB
-
-
-项目开发
-
-初始化
-
-参考 React 结合 Electron 初始化自己的 react 项目。
-
-本地开发
-
-利用 Antd 组件库进行前端开发，提供 todo item 的增删改查...
-    </div>
-  </a>
-  <p class="post-meta">
-    Posted by kyuchan on August 22, 2020
-  </p>
-</div>
-<hr>
-
-<div class="post-preview">
-  <a href="/2020/02/01/piglet-04/">
-    <h2 class="post-title">
-      Piglet Part4 - AST
-    </h2>
-    
-    <h3 class="post-subtitle">
-      A language named Piglet to describe the flow chart
-    </h3>
-    
-    <div class="post-content-preview">
-      AST
-
-In short
-
-
-  prog { type: “prog”, consequent: [ …AST ] }
-  node { type: “node”, value: string }
-  if { type: “if”, test: AST, consequent: [ …AST ], alternate: AST }
-  switch { type: “switch”, ...
-    </div>
-  </a>
-  <p class="post-meta">
-    Posted by kyuchan on February 1, 2020
-  </p>
-</div>
-<hr>
-
-
-
-<ul class="pager">
-  
-  
-  <li class="next">
-    <a href="/page2">Older Posts &rarr;</a>
-  </li>
-  
+<ul>
+  <li>CDN</li>
+  <li>Preload、Prefetch</li>
+  <li>SW</li>
 </ul>
-
-
+ 
+        <hr />
+        <ul class="pager">
+          
+          <li class="previous">
+            <a
+              href="/2020/10/24/project-governance-01/"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="[WIP]「BLOG」项目治理 (上) - 工程化"
+              >&larr; Previous Post</a
+            >
+          </li>
+           
+        </ul>
+        
+      </div>
     </div>
   </div>
-</div>
+</article>
  <footer>
   <div class="container">
     <div class="row">
