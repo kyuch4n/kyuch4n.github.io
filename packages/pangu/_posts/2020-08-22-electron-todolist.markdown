@@ -4,7 +4,6 @@ title: "Electron 实现 ToDoList"
 subtitle: ""
 date: 2020-08-22
 author: "kyuchan"
-header-img: "assets/post.jpg"
 tags:
   - electron
 ---

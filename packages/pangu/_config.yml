@@ -1,16 +1,19 @@
 title: BLOG
 SEOTitle: KYU
 header-img: assets/home.jpg
+post-header-img: assets/post.jpg
+
 email: qq950810@gmail.com
 description: "kyu's personal blog"
 keyword: "kyuchan, kyuch4n, blog, fe, 博客, 个人网站, 互联网, 前端"
+baseurl: ""
 url: https://kyuch4n.github.io
 codingurl: https://github.com/kyuch4n
-baseurl: ""
 mail_address: qq950810@gmail.com
 weibo_username: kyuch4n
 zhihu_username: kyuchan
 github_username: kyuch4n
+
 highlighter: rouge
 permalink: pretty
 paginate: 5
