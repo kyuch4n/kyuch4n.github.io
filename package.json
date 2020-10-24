@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "pangu",
+  "version": "1.0.0",
+  "scripts": {
+    "watch:less": "nodemon -e less -x \"yarn build:less\"",
+    "watch:jekyll": "jekyll serve --watch",
+    "start": "run-p watch:less watch:jekyll",
+    "build:less": "lessc less/framework.less css/framework.css",
+    "build:jekyll": "jekyll build",
+    "build": "run-s build:less build:jekyll"
+  },
+  "dependencies": {
+    "less": "^3.12.2",
+    "nodemon": "^2.0.6",
+    "npm-run-all": "^4.1.5"
+  }
+}
