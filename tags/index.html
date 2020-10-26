@@ -6,10 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="kyu's personal blog" />
   <meta name="keyword" content="kyuchan, kyuch4n, blog, fe, 博客, 个人网站, 互联网, 前端" />
-  <!-- 百度站长工具验证 -->
-  <meta name="baidu-site-verification" content="code-2bes95grWe" />
-  <!-- Google Search 工具验证 -->
-  <meta name="google-site-verification" content="LjMTRPYT7DFSO2MiIWUn59U50dUNsk7dcvYew79cfac" />
+<!-- 百度站长工具验证 -->
+<meta name="baidu-site-verification" content="code-2bes95grWe" />
+<!-- Google Search 工具验证 -->
+<meta name="google-site-verification" content="LjMTRPYT7DFSO2MiIWUn59U50dUNsk7dcvYew79cfac" />
+<!-- 百度统计打点 -->
+<!-- https://tongji.baidu.com/web/10000277564/homepage/index -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?875ba0bb95ae7eb90248d044ccf946de';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
   <title>
     
       TAGS - KYU
@@ -28,34 +40,20 @@
   <!-- WARNING: Must after bootstrap.css to cover style -->
   <link rel="stylesheet" href="/css/framework.css" />
   <!-- Preload Img -->
-  <link rel="preload" href="/assets/home.jpg" as="image">
-  <link rel="preload" href="/assets/post.jpg" as="image">
-  <link rel="preload" href="/assets/tags.jpg" as="image">
-  <link rel="preload" href="/assets/404.jpg" as="image">
-
-
-  <!-- 百度统计打点 -->
-  <!-- https://tongji.baidu.com/web/10000277564/homepage/index -->
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement('script');
-      hm.src = 'https://hm.baidu.com/hm.js?875ba0bb95ae7eb90248d044ccf946de';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-  <!-- Prefetch By Google QuickLink -->
-  <script src="https://unpkg.com/quicklink"></script>
-  <script>
-    window.addEventListener('load', () => {
-      quicklink.listen();
-    });
-  </script>
-  <!-- 彩蛋 -->
-  <script>
-    console.log('挖藕，你发现了彩蛋！！！！！');
-    console.log(String.raw`
+<link rel="preload" href="/assets/home.jpg" as="image" />
+<link rel="preload" href="/assets/post.jpg" as="image" />
+<link rel="preload" href="/assets/tags.jpg" as="image" />
+<link rel="preload" href="/assets/404.jpg" as="image" />
+<!-- Prefetch By Google QuickLink -->
+<script src="https://unpkg.com/quicklink"></script>
+<script>
+  window.addEventListener('load', () => {
+    quicklink.listen();
+  });
+</script>
+<script>
+  console.log('挖藕，你发现了彩蛋！！！！！');
+  console.log(String.raw`
           _____                _____                    _____          
          /\    \              |\    \                  /\    \         
         /::\____\             |:\____\                /::\____\        
@@ -77,8 +75,27 @@
        \::|   |                                      \::::/    /       
         \:|   |                                       \::/____/        
          \|___|                                        ~~              
-    `);
-  </script>
+  `);
+</script>
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker
+        .register('/service-worker.js')
+        .then(function(registration) {
+          console.log(
+            'ServiceWorker registration successful with scope: ',
+            registration.scope,
+          );
+        })
+        .catch(function(err) {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+  }
+</script>
+
 </head>
 
   <body ontouchstart="">
@@ -148,7 +165,9 @@
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="site-heading">
           <h1>
-            TAGS
+            
+              TAGS
+            
           </h1>
           <span class="subheading">YESTERDAY U SAID TOMORROW</span>
         </div>
@@ -158,9 +177,7 @@
 </header>
 <div class="container">
   <div class="row">
-    <div
-      class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container"
-    >
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
   <div id="tag_cloud" class="tags">
     

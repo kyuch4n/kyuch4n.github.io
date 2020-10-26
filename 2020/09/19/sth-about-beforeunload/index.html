@@ -6,10 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="kyu's personal blog" />
   <meta name="keyword" content="kyuchan, kyuch4n, blog, fe, 博客, 个人网站, 互联网, 前端" />
-  <!-- 百度站长工具验证 -->
-  <meta name="baidu-site-verification" content="code-2bes95grWe" />
-  <!-- Google Search 工具验证 -->
-  <meta name="google-site-verification" content="LjMTRPYT7DFSO2MiIWUn59U50dUNsk7dcvYew79cfac" />
+<!-- 百度站长工具验证 -->
+<meta name="baidu-site-verification" content="code-2bes95grWe" />
+<!-- Google Search 工具验证 -->
+<meta name="google-site-verification" content="LjMTRPYT7DFSO2MiIWUn59U50dUNsk7dcvYew79cfac" />
+<!-- 百度统计打点 -->
+<!-- https://tongji.baidu.com/web/10000277564/homepage/index -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?875ba0bb95ae7eb90248d044ccf946de';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
   <title>
     
       关于 beforeunload/unload 的二三事 - KYU
@@ -28,34 +40,20 @@
   <!-- WARNING: Must after bootstrap.css to cover style -->
   <link rel="stylesheet" href="/css/framework.css" />
   <!-- Preload Img -->
-  <link rel="preload" href="/assets/home.jpg" as="image">
-  <link rel="preload" href="/assets/post.jpg" as="image">
-  <link rel="preload" href="/assets/tags.jpg" as="image">
-  <link rel="preload" href="/assets/404.jpg" as="image">
-
-
-  <!-- 百度统计打点 -->
-  <!-- https://tongji.baidu.com/web/10000277564/homepage/index -->
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement('script');
-      hm.src = 'https://hm.baidu.com/hm.js?875ba0bb95ae7eb90248d044ccf946de';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-  <!-- Prefetch By Google QuickLink -->
-  <script src="https://unpkg.com/quicklink"></script>
-  <script>
-    window.addEventListener('load', () => {
-      quicklink.listen();
-    });
-  </script>
-  <!-- 彩蛋 -->
-  <script>
-    console.log('挖藕，你发现了彩蛋！！！！！');
-    console.log(String.raw`
+<link rel="preload" href="/assets/home.jpg" as="image" />
+<link rel="preload" href="/assets/post.jpg" as="image" />
+<link rel="preload" href="/assets/tags.jpg" as="image" />
+<link rel="preload" href="/assets/404.jpg" as="image" />
+<!-- Prefetch By Google QuickLink -->
+<script src="https://unpkg.com/quicklink"></script>
+<script>
+  window.addEventListener('load', () => {
+    quicklink.listen();
+  });
+</script>
+<script>
+  console.log('挖藕，你发现了彩蛋！！！！！');
+  console.log(String.raw`
           _____                _____                    _____          
          /\    \              |\    \                  /\    \         
         /::\____\             |:\____\                /::\____\        
@@ -77,8 +75,27 @@
        \::|   |                                      \::::/    /       
         \:|   |                                       \::/____/        
          \|___|                                        ~~              
-    `);
-  </script>
+  `);
+</script>
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker
+        .register('/service-worker.js')
+        .then(function(registration) {
+          console.log(
+            'ServiceWorker registration successful with scope: ',
+            registration.scope,
+          );
+        })
+        .catch(function(err) {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+  }
+</script>
+
 </head>
 
   <body ontouchstart="">
@@ -176,9 +193,7 @@
 <article>
   <div class="container">
     <div class="row">
-      <div
-        class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container"
-      >
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container" >
         <p>在开发中我们也许会遇到这样的需求：即在用户离开当前页面的时候发送请求或者打点。自然我们需要对页面的 beforeunload/unload 事件去做一些事件监听。</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
@@ -273,7 +288,8 @@
 <h1 id="at-last">At last</h1>
 
 <p>不幸的是，如果请求无法被 revert，而离开时的需求逻辑又比较复杂，我也暂时没想到什么特别好的方法。（不如考虑改一下产品逻辑……</p>
- 
+
+        
         <hr />
         <ul class="pager">
           
@@ -283,18 +299,21 @@
               data-toggle="tooltip"
               data-placement="top"
               title="Electron 实现 ToDoList"
-              >&larr; Previous Post</a
             >
+              &larr; Previous Post
+            </a>
           </li>
-           
+          
+          
           <li class="next">
-            <a
-              href="/2020/10/24/project-governance-01/"
-              data-toggle="tooltip"
-              data-placement="top"
+            <a 
+              href="/2020/10/24/project-governance-01/" 
+              data-toggle="tooltip" 
+              data-placement="top" 
               title="[WIP]「BLOG」项目治理 (上) - 工程化"
-              >Next Post &rarr;</a
             >
+              Next Post &rarr;
+            </a>
           </li>
           
         </ul>
