@@ -85,12 +85,12 @@
         .register('/service-worker.js')
         .then(function(registration) {
           console.log(
-            'ServiceWorker registration successful with scope: ',
+            '[ServiceWorker] Regist successful with scope: ',
             registration.scope,
           );
         })
         .catch(function(err) {
-          console.log('ServiceWorker registration failed: ', err);
+          console.log('[ServiceWorker] Regist failed: ', err);
         });
     });
   }
