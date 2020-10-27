@@ -1,5 +1,5 @@
-const VER = '1.0.0';
-const CACHE_NAME = 'KYU_SW_V' + VER;
+const VER = '1603807087751'; // timestamp
+const CACHE_NAME = 'KYU_SW_' + VER;
 
 const URL_TO_CACHE = [
   '/assets/home.jpg',
@@ -39,7 +39,17 @@ self.addEventListener('activate', function(event) {
   return self.clients.claim();
 });
 
-const DOMAIN_TO_IGNORE = ['baidu.com'];
+const DOMAIN_BLACK_LIST = ['baidu.com'];
+const RESOURCE_WHITE_LIST = ['.jpg', '.png', '.js', '.css'];
+const enable = url => {
+  if (!DOMAIN_BLACK_LIST.find(i => ~url.indexOf(i))) {
+    if (RESOURCE_WHITE_LIST.find(i => ~url.indexOf(i))) {
+      return true;
+    }
+  }
+  return false;
+};
+
 self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).then(res => {
@@ -48,7 +58,7 @@ self.addEventListener('fetch', function(event) {
         fetch(event.request)
           .then(responese => {
             const url = event.request.url;
-            if (!DOMAIN_TO_IGNORE.find(i => url.indexOf(i) > -1)) {
+            if (enable(url)) {
               console.log('[ServiceWorker] Add to cache: ', url);
               const responeseClone = responese.clone();
               caches.open(CACHE_NAME).then(cache => {
