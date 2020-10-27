@@ -5,11 +5,23 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://kyuch4n.github.io/2020/10/24/project-governance-02/</loc>
+    <loc>https://kyuch4n.github.io/lab/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://kyuch4n.github.io/2020/08/22/electron-todolist/</loc>
+    <loc>https://kyuch4n.github.io/2020/10/24/project-optimize-01/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://kyuch4n.github.io/2020/10/24/project-optimize-02/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://kyuch4n.github.io/2020/10/27/file-download/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://kyuch4n.github.io/2020/09/19/sth-about-beforeunload/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
@@ -17,7 +29,23 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://kyuch4n.github.io/lab/</loc>
+    <loc>https://kyuch4n.github.io/2020/02/01/piglet-04/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://kyuch4n.github.io/2020/02/01/piglet-03/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://kyuch4n.github.io/2020/08/22/electron-todolist/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://kyuch4n.github.io/page2/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://kyuch4n.github.io/2020/02/01/piglet-01/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
