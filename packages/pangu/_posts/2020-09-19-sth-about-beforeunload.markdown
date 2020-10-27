@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "关于 beforeunload/unload 的二三事"
-subtitle: ""
+title: '关于 beforeunload/unload 的二三事'
+subtitle: ''
 date: 2020-09-19
-author: "kyuchan"
+author: 'kyuchan'
 tags:
   - beforeunload
+  - unload
 ---
 
 在开发中我们也许会遇到这样的需求：即在用户离开当前页面的时候发送请求或者打点。自然我们需要对页面的 beforeunload/unload 事件去做一些事件监听。
@@ -14,7 +15,7 @@ tags:
 function log() {
   $.ajax();
 }
-window.addEventListener("unload", log, false);
+window.addEventListener('unload', log, false);
 ```
 
 事实上，由于页面已经被用户关闭了，你的请求可能并没有成功发送（Canceled）。
@@ -25,9 +26,9 @@ window.addEventListener("unload", log, false);
 
 ```javascript
 function log() {
-  navigator.sendBeacon("/log", analyticsData);
+  navigator.sendBeacon('/log', analyticsData);
 }
-window.addEventListener("unload", log, false);
+window.addEventListener('unload', log, false);
 ```
 
 # Confirm dialog
@@ -37,11 +38,11 @@ window.addEventListener("unload", log, false);
 如果用户此时正在编辑一些重要的信息，希望在用户离开或者刷新页面前进行二次确认，这又该如何呢？我们还可以监听 beforeunload 事件弹出确认对话框。
 
 ```javascript
-window.addEventListener("beforeunload", (event) => {
+window.addEventListener('beforeunload', event => {
   // Cancel the event as stated by the standard.
   event.preventDefault();
   // Chrome requires returnValue to be set.
-  event.returnValue = "";
+  event.returnValue = '';
 });
 ```
 
@@ -54,7 +55,7 @@ window.addEventListener("beforeunload", (event) => {
 无奈之下我们只能**将请求置于 beforeunload 的事件回调之中**。这样，在弹窗进行二次确认的时请求会正常发送，而**在 unload 执行前的事件循环里面执行请求的回调**。
 
 ```javascript
-window.addEventListener("beforeunload", (event) => {
+window.addEventListener('beforeunload', event => {
   // Cancel the event as stated by the standard.
   event.preventDefault();
 
@@ -67,7 +68,7 @@ window.addEventListener("beforeunload", (event) => {
   });
 
   // Chrome requires returnValue to be set.
-  event.returnValue = "";
+  event.returnValue = '';
 });
 ```
 
@@ -78,25 +79,27 @@ window.addEventListener("beforeunload", (event) => {
 如果你的请求是可以被 **revert** 的（A → B → A），那我们还可以通过一些小 **trick** 判断出用户仍然停留在当前页面，从而重置状态。
 
 ```javascript
-window.addEventListener("beforeunload", (event) => {
+window.addEventListener('beforeunload', event => {
   // Cancel the event as stated by the standard.
   event.preventDefault();
 
   // Ajax
   $.ajax({
     // options
-  }).then(() => {
-    // 回调处理
-    // do sth...
-  }).then(() => {
-    setTimeout(() => {
-      // revert
+  })
+    .then(() => {
+      // 回调处理
       // do sth...
-    }, 1000);
-  });
+    })
+    .then(() => {
+      setTimeout(() => {
+        // revert
+        // do sth...
+      }, 1000);
+    });
 
   // Chrome requires returnValue to be set.
-  event.returnValue = "";
+  event.returnValue = '';
 });
 ```
 

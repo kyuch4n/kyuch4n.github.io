@@ -1,4 +1,4 @@
-const VER = '1603807087751'; // timestamp
+const VER = '1603807087752'; // timestamp
 const CACHE_NAME = 'KYU_SW_' + VER;
 
 const URL_TO_CACHE = [

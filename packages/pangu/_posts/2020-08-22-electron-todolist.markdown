@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Electron 实现 ToDoList"
-subtitle: ""
+title: 'Electron 实现 ToDoList'
+subtitle: ''
 date: 2020-08-22
-author: "kyuchan"
+author: 'kyuchan'
 tags:
   - electron
 ---
@@ -43,8 +43,8 @@ IndexedDB
 
 ```typescript
 enum TagStatus {
-  PENDING = "pending",
-  DONE = "done",
+  PENDING = 'pending',
+  DONE = 'done',
 }
 
 interface Tag {
@@ -69,7 +69,7 @@ interface Tag {
 将窗口关闭改为隐藏。
 
 ```typescript
-mainWindow.on("close", (e) => {
+mainWindow.on('close', e => {
   mainWindow.hide();
   e.preventDefault();
 });
@@ -78,11 +78,11 @@ mainWindow.on("close", (e) => {
 ### 禁止 cmd+r reload
 
 ```typescript
-window.onkeydown = function (e: any) {
+window.onkeydown = function(e: any) {
   const ev = window.event || e;
   const code = ev.keyCode || ev.which;
   if ((ev.ctrlKey || ev.metaKey) && code === 82) {
-    console.warn("Reload is not allowed!");
+    console.warn('Reload is not allowed!');
     return false;
   }
 };
@@ -103,8 +103,11 @@ const shake = () => {
     { x: 0, y: 0 },
   ];
 
-  const routeArray = moveArrry.map((item) => ({ x: item.x + startX, y: item.y + startY }));
-  routeArray.forEach((r) => win.setPosition(r.x, r.y));
+  const routeArray = moveArrry.map(item => ({
+    x: item.x + startX,
+    y: item.y + startY,
+  }));
+  routeArray.forEach(r => win.setPosition(r.x, r.y));
 };
 ```
 
@@ -167,7 +170,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: '10.x'
 
       - name: Install dependencies
         run: |
