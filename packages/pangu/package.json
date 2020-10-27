@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "pangu",
+  "name": "@kyu/pangu",
   "version": "1.0.0",
   "scripts": {
     "watch:less": "nodemon -e less -x \"yarn build:less\"",

@@ -17,3 +17,8 @@ cd $CWD/packages/shennong
 yarn build
 # Copy Build Files
 cp -rf dist $CWD/build/lab
+
+# Regen Sitemap (Not Real Time)
+echo '>>>>>>>>>>>>>>>>>>>>'
+echo 'generate sitemap ...'
+node $CWD/scripts/sitemap.js

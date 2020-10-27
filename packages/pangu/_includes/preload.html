@@ -1,0 +1,38 @@
+<!-- Preload Img -->
+<link rel="preload" href="/assets/home.jpg" as="image" />
+<link rel="preload" href="/assets/post.jpg" as="image" />
+<link rel="preload" href="/assets/tags.jpg" as="image" />
+<link rel="preload" href="/assets/404.jpg" as="image" />
+<!-- Prefetch By Google QuickLink -->
+<script src="https://unpkg.com/quicklink"></script>
+<script>
+  window.addEventListener('load', () => {
+    quicklink.listen();
+  });
+</script>
+<script>
+  console.log('挖藕，你发现了彩蛋！！！！！');
+  console.log(String.raw`
+          _____                _____                    _____          
+         /\    \              |\    \                  /\    \         
+        /::\____\             |:\____\                /::\____\        
+       /:::/    /             |::|   |               /:::/    /        
+      /:::/    /              |::|   |              /:::/    /         
+     /:::/    /               |::|   |             /:::/    /          
+    /:::/____/                |::|   |            /:::/    /           
+   /::::\    \                |::|   |           /:::/    /            
+  /::::::\____\________       |::|___|______    /:::/    /      _____  
+ /:::/\:::::::::::\    \      /::::::::\    \  /:::/____/      /\    \ 
+/:::/  |:::::::::::\____\    /::::::::::\____\|:::|    /      /::\____\
+\::/   |::|~~~|~~~~~        /:::/~~~~/~~      |:::|____\     /:::/    /
+ \/____|::|   |            /:::/    /          \:::\    \   /:::/    / 
+       |::|   |           /:::/    /            \:::\    \ /:::/    /  
+       |::|   |          /:::/    /              \:::\    /:::/    /   
+       |::|   |          \::/    /                \:::\__/:::/    /    
+       |::|   |           \/____/                  \::::::::/    /     
+       |::|   |                                     \::::::/    /      
+       \::|   |                                      \::::/    /       
+        \:|   |                                       \::/____/        
+         \|___|                                        ~~              
+  `);
+</script>
