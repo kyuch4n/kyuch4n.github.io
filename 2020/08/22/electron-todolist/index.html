@@ -227,8 +227,8 @@ IndexedDB
 <p>通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API">IndexedDB</a> 做前端存储。存储的数据结构如下：</p>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">enum</span> <span class="nx">TagStatus</span> <span class="p">{</span>
-  <span class="nx">PENDING</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">pending</span><span class="dl">"</span><span class="p">,</span>
-  <span class="nx">DONE</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">done</span><span class="dl">"</span><span class="p">,</span>
+  <span class="nx">PENDING</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">pending</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">DONE</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">done</span><span class="dl">'</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="kr">interface</span> <span class="nx">Tag</span> <span class="p">{</span>
@@ -254,7 +254,7 @@ IndexedDB
 
 <p>将窗口关闭改为隐藏。</p>
 
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">mainWindow</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">close</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">mainWindow</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">close</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="nx">mainWindow</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
   <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
 <span class="p">});</span>
@@ -262,11 +262,11 @@ IndexedDB
 
 <h3 id="禁止-cmdr-reload">禁止 cmd+r reload</h3>
 
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">onkeydown</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">onkeydown</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">ev</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">event</span> <span class="o">||</span> <span class="nx">e</span><span class="p">;</span>
   <span class="kd">const</span> <span class="nx">code</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">||</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">which</span><span class="p">;</span>
   <span class="k">if</span> <span class="p">((</span><span class="nx">ev</span><span class="p">.</span><span class="nx">ctrlKey</span> <span class="o">||</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">metaKey</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">code</span> <span class="o">===</span> <span class="mi">82</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">"</span><span class="s2">Reload is not allowed!</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="dl">'</span><span class="s1">Reload is not allowed!</span><span class="dl">'</span><span class="p">);</span>
     <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">};</span>
@@ -286,8 +286,11 @@ IndexedDB
     <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span> <span class="p">},</span>
   <span class="p">];</span>
 
-  <span class="kd">const</span> <span class="nx">routeArray</span> <span class="o">=</span> <span class="nx">moveArrry</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="na">x</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">startX</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">startY</span> <span class="p">}));</span>
-  <span class="nx">routeArray</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">r</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">win</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">y</span><span class="p">));</span>
+  <span class="kd">const</span> <span class="nx">routeArray</span> <span class="o">=</span> <span class="nx">moveArrry</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">({</span>
+    <span class="na">x</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">startX</span><span class="p">,</span>
+    <span class="na">y</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">startY</span><span class="p">,</span>
+  <span class="p">}));</span>
+  <span class="nx">routeArray</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">r</span> <span class="o">=&gt;</span> <span class="nx">win</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">y</span><span class="p">));</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
@@ -346,7 +349,7 @@ IndexedDB
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Setup node</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-node@v1</span>
         <span class="na">with</span><span class="pi">:</span>
-          <span class="na">node-version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">10.x"</span>
+          <span class="na">node-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">10.x'</span>
 
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install dependencies</span>
         <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>

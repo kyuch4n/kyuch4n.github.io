@@ -175,6 +175,13 @@
               >beforeunload</a
             >
             
+            <a
+              class="tag"
+              href="/tags/#unload"
+              title="unload"
+              >unload</a
+            >
+            
           </div>
           <h1>关于 beforeunload/unload 的二三事</h1>
           <h2 class="subheading"></h2>
@@ -199,7 +206,7 @@
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">();</span>
 <span class="p">}</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">unload</span><span class="dl">"</span><span class="p">,</span> <span class="nx">log</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">unload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">log</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>事实上，由于页面已经被用户关闭了，你的请求可能并没有成功发送（Canceled）。</p>
@@ -211,9 +218,9 @@
 </blockquote>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nb">navigator</span><span class="p">.</span><span class="nx">sendBeacon</span><span class="p">(</span><span class="dl">"</span><span class="s2">/log</span><span class="dl">"</span><span class="p">,</span> <span class="nx">analyticsData</span><span class="p">);</span>
+  <span class="nb">navigator</span><span class="p">.</span><span class="nx">sendBeacon</span><span class="p">(</span><span class="dl">'</span><span class="s1">/log</span><span class="dl">'</span><span class="p">,</span> <span class="nx">analyticsData</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">unload</span><span class="dl">"</span><span class="p">,</span> <span class="nx">log</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">unload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">log</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h1 id="confirm-dialog">Confirm dialog</h1>
@@ -222,11 +229,11 @@
 
 <p>如果用户此时正在编辑一些重要的信息，希望在用户离开或者刷新页面前进行二次确认，这又该如何呢？我们还可以监听 beforeunload 事件弹出确认对话框。</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">beforeunload</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">beforeunload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="c1">// Cancel the event as stated by the standard.</span>
   <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
   <span class="c1">// Chrome requires returnValue to be set.</span>
-  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
@@ -238,7 +245,7 @@
 
 <p>无奈之下我们只能<strong>将请求置于 beforeunload 的事件回调之中</strong>。这样，在弹窗进行二次确认的时请求会正常发送，而<strong>在 unload 执行前的事件循环里面执行请求的回调</strong>。</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">beforeunload</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">beforeunload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="c1">// Cancel the event as stated by the standard.</span>
   <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
 
@@ -251,7 +258,7 @@
   <span class="p">});</span>
 
   <span class="c1">// Chrome requires returnValue to be set.</span>
-  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
@@ -261,25 +268,27 @@
 
 <p>如果你的请求是可以被 <strong>revert</strong> 的（A → B → A），那我们还可以通过一些小 <strong>trick</strong> 判断出用户仍然停留在当前页面，从而重置状态。</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">beforeunload</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">beforeunload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="c1">// Cancel the event as stated by the standard.</span>
   <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
 
   <span class="c1">// Ajax</span>
   <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
     <span class="c1">// options</span>
-  <span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// 回调处理</span>
-    <span class="c1">// do sth...</span>
-  <span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="c1">// revert</span>
+  <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// 回调处理</span>
       <span class="c1">// do sth...</span>
-    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
-  <span class="p">});</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// revert</span>
+        <span class="c1">// do sth...</span>
+      <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="p">});</span>
 
   <span class="c1">// Chrome requires returnValue to be set.</span>
-  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
@@ -307,10 +316,10 @@
           
           <li class="next">
             <a 
-              href="/2020/10/24/project-governance-01/" 
+              href="/2020/10/24/project-optimize-01/" 
               data-toggle="tooltip" 
               data-placement="top" 
-              title="[WIP]「BLOG」项目治理 (上) - 工程化"
+              title="「BLOG」项目优化 (上) - 工程化"
             >
               Next Post &rarr;
             </a>
