@@ -1,6 +1,6 @@
 ---
 layout: post
-title: '使用 Service Worker 监控 Unload'
+title: '使用 Service Worker 监听 Unload 事件'
 subtitle: ''
 date: 2020-10-28
 author: 'kyuchan'
