@@ -24,12 +24,12 @@
 
   <title>
     
-      Piglet Part2 - Tutorial - KYU
+      使用 Service Worker 监听 Unload 事件 - KYU
     
   </title>
 
   <link rel="shortcut icon" href="/assets/favicon.ico" />
-  <link rel="canonical" href="https://kyuch4n.github.io/2020/02/01/piglet-02/" />
+  <link rel="canonical" href="https://kyuch4n.github.io/2020/10/28/0700/" />
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.css" />
   <!-- Pygments Github CSS -->
@@ -170,20 +170,34 @@
             
             <a
               class="tag"
-              href="/tags/#piglet"
-              title="piglet"
-              >piglet</a
+              href="/tags/#beforeunload"
+              title="beforeunload"
+              >beforeunload</a
+            >
+            
+            <a
+              class="tag"
+              href="/tags/#unload"
+              title="unload"
+              >unload</a
+            >
+            
+            <a
+              class="tag"
+              href="/tags/#service worker"
+              title="service worker"
+              >service worker</a
             >
             
           </div>
-          <h1>Piglet Part2 - Tutorial</h1>
-          <h2 class="subheading">A language named Piglet to describe the flow chart</h2>
+          <h1>使用 Service Worker 监听 Unload 事件</h1>
+          <h2 class="subheading"></h2>
           <span class="meta">
             Posted by
             
               kyuchan
             
-            on February 1, 2020
+            on October 28, 2020
           </span>
         </div>
       </div>
@@ -194,151 +208,14 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container" >
-        <h1 id="tutorial">Tutorial</h1>
+        <p>TO BE CONTINUS …</p>
 
-<p>Piglet is an extremely simple language to describe flow.</p>
-
-<h2 id="1-dont-support">1. Don’t Support</h2>
+<h1 id="参考">参考</h1>
 
 <ul>
-  <li>No DataType and Variable</li>
-  <li>No Operator</li>
-  <li>And of cource No Function</li>
+  <li><a href="https://www.yuque.com/miaoliaogemie/blog/nztgt8">🔗 - 1</a></li>
+  <li><a href="https://juejin.im/entry/6844903705318260743">🔗 - 2</a></li>
 </ul>
-
-<h2 id="2-what-piglet-support">2. What Piglet Support</h2>
-
-<h3 id="21-grammar">2.1 Grammar</h3>
-
-<h4 id="211-piglet-keywords">2.1.1 Piglet Keywords</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Keyword</th>
-      <th style="text-align: left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">break</td>
-      <td style="text-align: left">Terminates a switch or a loop</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">continue</td>
-      <td style="text-align: left">Jumps out of a loop and starts at the top</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">if … elif … else</td>
-      <td style="text-align: left">Marks a block of statements to be executed, depending on a condition</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">switch … case</td>
-      <td style="text-align: left">Marks a block of statements to be executed, depending on different cases</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">do … while</td>
-      <td style="text-align: left">Executes a block of statements, and repeats the block, while a condition is true</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">while …</td>
-      <td style="text-align: left">While a condition is true, executes a block of statements, and repeats the block</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="212-semicolons">2.1.2 Semicolons</h4>
-
-<p>Semicolons separate Piglet statements.</p>
-
-<p>Add a semicolon at the end of each executable statement:</p>
-
-<pre><code class="language-piglet">初始化;
-</code></pre>
-
-<h4 id="213-white-space">2.1.3 White Space</h4>
-
-<p>Piglet ignores multiple spaces.</p>
-
-<pre><code class="language-piglet">初始化   ;
-</code></pre>
-
-<h4 id="214-case-sensitive">2.1.4 Case Sensitive</h4>
-
-<p>do and DO are different.</p>
-
-<h3 id="22-comments">2.2 Comments</h3>
-
-<p>Comments can be used to explain code, and to make it more readable.</p>
-
-<p>Example:</p>
-
-<pre><code class="language-piglet">init; # this is a comment
-</code></pre>
-
-<h3 id="23-conditions">2.3 Conditions</h3>
-
-<p>Conditional statements are used to perform different actions based on different conditions.</p>
-
-<p>Piglet has the following conditional statements:</p>
-
-<ul>
-  <li>Use if to specify a block of code to be executed, if a specified condition is true</li>
-  <li>Use else to specify a block of code to be executed, if the same condition is false</li>
-  <li>Use elif to specify a new condition to test, if the first condition is false</li>
-  <li>Use switch to specify many alternative blocks of code to be executed</li>
-</ul>
-
-<h3 id="24-switch">2.4 Switch</h3>
-
-<p>The switch statement is used to perform different actions based on different conditions.</p>
-
-<p>Use the switch statement to select one of many code blocks to be executed.</p>
-
-<p>I believe you are familiar with the usage. Here is an example:</p>
-
-<pre><code class="language-piglet">switch(size) {
-  case M:
-    code block;
-    break;
-  case L:
-    code block;
-    break;
-  default:
-    code block;
-}
-</code></pre>
-
-<h3 id="25-loop-while">2.5 Loop While</h3>
-
-<p>Loops can execute a block of code as long as a specified condition is true.</p>
-
-<p>I believe you are familiar with the usage.</p>
-
-<h4 id="251-the-while-loop">2.5.1 The While Loop</h4>
-
-<pre><code class="language-piglet">while (a &gt; 0) {
-  code block to be executed;
-}
-</code></pre>
-
-<h4 id="252-the-dowhile-loop">2.5.2 The Do/While Loop</h4>
-
-<pre><code class="language-piglet">do {
-  code block to be executed;
-}
-while (a &gt; 0);
-</code></pre>
-
-<h4 id="253-no-loop-for">2.5.3 No Loop For</h4>
-
-<p>Not support for loop yet.</p>
-
-<h3 id="26-break-and-contnue">2.6 Break And Contnue</h3>
-
-<p>The break statement “jumps out” of a loop.</p>
-
-<p>The continue statement “jumps over” one iteration in the loop.</p>
 
         
         <hr />
@@ -346,26 +223,15 @@ while (a &gt; 0);
           
           <li class="previous">
             <a
-              href="/2020/02/01/piglet-01/"
+              href="/2020/10/27/0700/"
               data-toggle="tooltip"
               data-placement="top"
-              title="Piglet Part1 - Examples"
+              title="浏览器下载文件的一些方法"
             >
               &larr; Previous Post
             </a>
           </li>
           
-          
-          <li class="next">
-            <a 
-              href="/2020/02/01/piglet-03/" 
-              data-toggle="tooltip" 
-              data-placement="top" 
-              title="Piglet Part3 - Tokens"
-            >
-              Next Post &rarr;
-            </a>
-          </li>
           
         </ul>
         

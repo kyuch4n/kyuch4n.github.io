@@ -179,7 +179,7 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
       
 <div class="post-preview">
-  <a href="/2020/10/28/page-leave-monitor/">
+  <a href="/2020/10/28/0700/">
     <h2 class="post-title">
       使用 Service Worker 监听 Unload 事件
     </h2>
@@ -191,6 +191,13 @@
     <div class="post-content-preview">
       TO BE CONTINUS …
 
+参考
+
+
+  🔗 - 1
+  🔗 - 2
+
+
     </div>
   </a>
   <p class="post-meta">
@@ -200,7 +207,7 @@
 <hr>
 
 <div class="post-preview">
-  <a href="/2020/10/27/file-download/">
+  <a href="/2020/10/27/0700/">
     <h2 class="post-title">
       浏览器下载文件的一些方法
     </h2>
@@ -210,7 +217,18 @@
     </h3>
     
     <div class="post-content-preview">
-      TO BE CONTINUS …
+      
+  的默认行为
+  什么时候会触发浏览器的下载
+  如果要通过 js 做当前页面数据的导出及下载应该怎样搞 (js-file-download)
+  对于一个链接，浏览器什么情况下会在预览，什么条件下会触发下载
+  
+    服务端 response 里面 attatchment 属性有什么功能
+  
+  🔗
+
+
+TO BE CONTINUS …
 
     </div>
   </a>
@@ -221,9 +239,9 @@
 <hr>
 
 <div class="post-preview">
-  <a href="/2020/10/24/project-optimize-02/">
+  <a href="/2020/10/24/0800/">
     <h2 class="post-title">
-      「BLOG」项目优化 (下) - 性能优化
+      「BLOG」项目治理 (下) - 性能优化
     </h2>
     
     <h3 class="post-subtitle">
@@ -248,9 +266,9 @@
 <hr>
 
 <div class="post-preview">
-  <a href="/2020/10/24/project-optimize-01/">
+  <a href="/2020/10/24/0700/">
     <h2 class="post-title">
-      「BLOG」项目优化 (上) - 工程化
+      「BLOG」项目治理 (上) - 工程化
     </h2>
     
     <h3 class="post-subtitle">
@@ -276,7 +294,7 @@
 <hr>
 
 <div class="post-preview">
-  <a href="/2020/09/19/sth-about-beforeunload/">
+  <a href="/2020/09/19/0000/">
     <h2 class="post-title">
       关于 beforeunload/unload 的二三事
     </h2>
@@ -299,6 +317,114 @@ window.addEventListener('unload', log, false);
   </a>
   <p class="post-meta">
     Posted by kyuchan on September 19, 2020
+  </p>
+</div>
+<hr>
+
+<div class="post-preview">
+  <a href="/2020/08/22/0000/">
+    <h2 class="post-title">
+      Electron 实现 ToDoList
+    </h2>
+    
+    <h3 class="post-subtitle">
+      
+    </h3>
+    
+    <div class="post-content-preview">
+      项目预览
+
+Neural - ToDoList for Mac
+
+技术选型
+
+# 语言
+typescript
+# 框架
+react + electron
+# 组件库
+Antd
+# 存储
+IndexedDB
+
+
+项目开发
+
+初始化
+
+参考 React 结合 Electron 初始化自己的 react 项目。
+
+本地开发
+
+利用 Antd 组件库进行前端开发，提供 todo item 的增删改查...
+    </div>
+  </a>
+  <p class="post-meta">
+    Posted by kyuchan on August 22, 2020
+  </p>
+</div>
+<hr>
+
+<div class="post-preview">
+  <a href="/2020/02/01/1000/">
+    <h2 class="post-title">
+      Piglet Part4 - AST
+    </h2>
+    
+    <h3 class="post-subtitle">
+      A language named Piglet to describe the flow chart
+    </h3>
+    
+    <div class="post-content-preview">
+      AST
+
+In short
+
+
+  prog { type: “prog”, consequent: [ …AST ] }
+  node { type: “node”, value: string }
+  if { type: “if”, test: AST, consequent: [ …AST ], alternate: AST }
+  switch { type: “switch”, ...
+    </div>
+  </a>
+  <p class="post-meta">
+    Posted by kyuchan on February 1, 2020
+  </p>
+</div>
+<hr>
+
+<div class="post-preview">
+  <a href="/2020/02/01/0900/">
+    <h2 class="post-title">
+      Piglet Part3 - Tokens
+    </h2>
+    
+    <h3 class="post-subtitle">
+      A language named Piglet to describe the flow chart
+    </h3>
+    
+    <div class="post-content-preview">
+      Tokens
+
+Snippet 1
+
+init;
+if (failure) {
+  has error;
+  break;
+}
+submit;
+
+
+↓↓↓
+
+Token { type: 'node', value: 'init' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'keyword', value: 'if'...
+    </div>
+  </a>
+  <p class="post-meta">
+    Posted by kyuchan on February 1, 2020
   </p>
 </div>
 <hr>

@@ -24,12 +24,12 @@
 
   <title>
     
-      「BLOG」项目优化 (上) - 工程化 - KYU
+      Piglet Part1 - Examples - KYU
     
   </title>
 
   <link rel="shortcut icon" href="/assets/favicon.ico" />
-  <link rel="canonical" href="https://kyuch4n.github.io/2020/10/24/project-optimize-01/" />
+  <link rel="canonical" href="https://kyuch4n.github.io/2020/02/01/0700/" />
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.css" />
   <!-- Pygments Github CSS -->
@@ -170,20 +170,20 @@
             
             <a
               class="tag"
-              href="/tags/#monorepo"
-              title="monorepo"
-              >monorepo</a
+              href="/tags/#piglet"
+              title="piglet"
+              >piglet</a
             >
             
           </div>
-          <h1>「BLOG」项目优化 (上) - 工程化</h1>
-          <h2 class="subheading"></h2>
+          <h1>Piglet Part1 - Examples</h1>
+          <h2 class="subheading">A language named Piglet to describe the flow chart</h2>
           <span class="meta">
             Posted by
             
               kyuchan
             
-            on October 24, 2020
+            on February 1, 2020
           </span>
         </div>
       </div>
@@ -194,43 +194,75 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container" >
-        <p>TO BE CONTINUS …</p>
+        <h1 id="examples">Examples</h1>
 
-<ul>
-  <li>monorepo</li>
-  <li>lint、prettier</li>
-  <li>packages instruction</li>
-  <li>scripts</li>
-</ul>
+<h2 id="an-simple-example">An Simple Example</h2>
 
-        
-        <hr />
-        <ul class="pager">
-          
-          <li class="previous">
-            <a
-              href="/2020/09/19/sth-about-beforeunload/"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="关于 beforeunload/unload 的二三事"
-            >
-              &larr; Previous Post
-            </a>
-          </li>
-          
-          
-          <li class="next">
-            <a 
-              href="/2020/10/24/project-optimize-02/" 
-              data-toggle="tooltip" 
-              data-placement="top" 
-              title="「BLOG」项目优化 (下) - 性能优化"
-            >
-              Next Post &rarr;
-            </a>
-          </li>
-          
-        </ul>
+<pre><code class="language-piglet">init;
+if (failure) {
+  has error;
+  break;
+}
+submit;
+</code></pre>
+
+<hr />
+
+<h2 id="an-example-with-chinese">An Example with Chinese</h2>
+
+<pre><code class="language-piglet">初始化;
+
+if (出错) {
+  出错啦;
+  break;
+}
+
+提交;
+</code></pre>
+
+<hr />
+
+<h2 id="an-example-of-switch-case">An Example of switch-case</h2>
+
+<pre><code class="language-piglet">switch (num) {
+  case 1:
+    something for 1;
+    break;
+  case 2:
+    something for 2;
+  default:
+    something default;
+}
+
+something last;
+</code></pre>
+
+<hr />
+
+<h2 id="an-example-of-if-else">An Example of if-else</h2>
+
+<pre><code class="language-piglet">if (a) {
+  something for A;
+} elif (b) {
+  something for B;
+} else {
+  something else;
+}
+
+something last;
+</code></pre>
+
+<hr />
+
+<h2 id="an-example-of-a-circle">An Example of a Circle</h2>
+
+<pre><code class="language-piglet">init;
+do {
+  retry;
+} while (failure)
+submit;
+</code></pre>
+
         
       </div>
     </div>

@@ -24,12 +24,12 @@
 
   <title>
     
-      Piglet Part3 - Tokens - KYU
+      「BLOG」项目治理 (上) - 工程化 - KYU
     
   </title>
 
   <link rel="shortcut icon" href="/assets/favicon.ico" />
-  <link rel="canonical" href="https://kyuch4n.github.io/2020/02/01/piglet-03/" />
+  <link rel="canonical" href="https://kyuch4n.github.io/2020/10/24/0700/" />
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.css" />
   <!-- Pygments Github CSS -->
@@ -170,20 +170,20 @@
             
             <a
               class="tag"
-              href="/tags/#piglet"
-              title="piglet"
-              >piglet</a
+              href="/tags/#monorepo"
+              title="monorepo"
+              >monorepo</a
             >
             
           </div>
-          <h1>Piglet Part3 - Tokens</h1>
-          <h2 class="subheading">A language named Piglet to describe the flow chart</h2>
+          <h1>「BLOG」项目治理 (上) - 工程化</h1>
+          <h2 class="subheading"></h2>
           <span class="meta">
             Posted by
             
               kyuchan
             
-            on February 1, 2020
+            on October 24, 2020
           </span>
         </div>
       </div>
@@ -194,144 +194,14 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container" >
-        <h1 id="tokens">Tokens</h1>
+        <p>TO BE CONTINUS …</p>
 
-<h2 id="snippet-1">Snippet 1</h2>
-
-<pre><code class="language-piglet">init;
-if (failure) {
-  has error;
-  break;
-}
-submit;
-</code></pre>
-
-<p>↓↓↓</p>
-
-<pre><code class="language-piglet">Token { type: 'node', value: 'init' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'keyword', value: 'if' },
-Token { type: 'punctuation', value: '(' },
-Token { type: 'node', value: 'failure' },
-Token { type: 'punctuation', value: ')' },
-Token { type: 'punctuation', value: '{' },
-Token { type: 'node', value: 'has error' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'keyword', value: 'break' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'punctuation', value: '}' },
-Token { type: 'node', value: 'submit' },
-Token { type: 'punctuation', value: ';' }
-</code></pre>
-
-<h2 id="snippet-2">Snippet 2</h2>
-
-<pre><code class="language-piglet">switch (num) {
-  case 1:
-    something for 1;
-    break;
-  case 2:
-    something for 2;
-  default:
-    something default;
-}
-
-something last;
-</code></pre>
-
-<p>↓↓↓</p>
-
-<pre><code class="language-piglet">Token { type: 'keyword', value: 'switch' },
-Token { type: 'punctuation', value: '(' },
-Token { type: 'node', value: 'num' },
-Token { type: 'punctuation', value: ')' },
-Token { type: 'punctuation', value: '{' },
-Token { type: 'keyword', value: 'case' },
-Token { type: 'node', value: '1' },
-Token { type: 'punctuation', value: ':' },
-Token { type: 'node', value: 'something for 1' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'keyword', value: 'break' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'keyword', value: 'case' },
-Token { type: 'node', value: '2' },
-Token { type: 'punctuation', value: ':' },
-Token { type: 'node', value: 'something for 2' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'keyword', value: 'default' },
-Token { type: 'punctuation', value: ':' },
-Token { type: 'node', value: 'something default' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'punctuation', value: '}' },
-Token { type: 'node', value: 'something last' },
-Token { type: 'punctuation', value: ';' }
-</code></pre>
-
-<h2 id="snippet-3">Snippet 3</h2>
-
-<pre><code class="language-piglet">if (a) {
-  something for A;
-} elif (b) {
-  something for B;
-} else {
-  something else;
-}
-
-something last;
-</code></pre>
-
-<p>↓↓↓</p>
-
-<pre><code class="language-piglet">Token { type: 'keyword', value: 'if' },
-Token { type: 'punctuation', value: '(' },
-Token { type: 'node', value: 'a' },
-Token { type: 'punctuation', value: ')' },
-Token { type: 'punctuation', value: '{' },
-Token { type: 'node', value: 'something for A' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'punctuation', value: '}' },
-Token { type: 'keyword', value: 'elif' },
-Token { type: 'punctuation', value: '(' },
-Token { type: 'node', value: 'b' },
-Token { type: 'punctuation', value: ')' },
-Token { type: 'punctuation', value: '{' },
-Token { type: 'node', value: 'something for B' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'punctuation', value: '}' },
-Token { type: 'keyword', value: 'else' },
-Token { type: 'punctuation', value: '{' },
-Token { type: 'node', value: 'something else' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'punctuation', value: '}' },
-Token { type: 'node', value: 'something last' },
-Token { type: 'punctuation', value: ';' }
-</code></pre>
-
-<h2 id="snippet-4">Snippet 4</h2>
-
-<pre><code class="language-piglet">init;
-do {
-  retry;
-} while (failure)
-submit;
-</code></pre>
-
-<p>↓↓↓</p>
-
-<pre><code class="language-piglet">Token { type: 'node', value: 'init' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'keyword', value: 'do' },
-Token { type: 'punctuation', value: '{' },
-Token { type: 'node', value: 'retry' },
-Token { type: 'punctuation', value: ';' },
-Token { type: 'punctuation', value: '}' },
-Token { type: 'keyword', value: 'while' },
-Token { type: 'punctuation', value: '(' },
-Token { type: 'node', value: 'failure' },
-Token { type: 'punctuation', value: ')' },
-Token { type: 'node', value: 'submit' },
-Token { type: 'punctuation', value: ';'
-</code></pre>
+<ul>
+  <li>monorepo</li>
+  <li>lint、prettier</li>
+  <li>packages instruction</li>
+  <li>scripts</li>
+</ul>
 
         
         <hr />
@@ -339,10 +209,10 @@ Token { type: 'punctuation', value: ';'
           
           <li class="previous">
             <a
-              href="/2020/02/01/piglet-02/"
+              href="/2020/09/19/0000/"
               data-toggle="tooltip"
               data-placement="top"
-              title="Piglet Part2 - Tutorial"
+              title="关于 beforeunload/unload 的二三事"
             >
               &larr; Previous Post
             </a>
@@ -351,10 +221,10 @@ Token { type: 'punctuation', value: ';'
           
           <li class="next">
             <a 
-              href="/2020/02/01/piglet-04/" 
+              href="/2020/10/24/0800/" 
               data-toggle="tooltip" 
               data-placement="top" 
-              title="Piglet Part4 - AST"
+              title="「BLOG」项目治理 (下) - 性能优化"
             >
               Next Post &rarr;
             </a>

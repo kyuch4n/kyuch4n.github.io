@@ -24,12 +24,12 @@
 
   <title>
     
-      关于 beforeunload/unload 的二三事 - KYU
+      Piglet Part3 - Tokens - KYU
     
   </title>
 
   <link rel="shortcut icon" href="/assets/favicon.ico" />
-  <link rel="canonical" href="https://kyuch4n.github.io/2020/09/19/sth-about-beforeunload/" />
+  <link rel="canonical" href="https://kyuch4n.github.io/2020/02/01/0900/" />
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.css" />
   <!-- Pygments Github CSS -->
@@ -170,27 +170,20 @@
             
             <a
               class="tag"
-              href="/tags/#beforeunload"
-              title="beforeunload"
-              >beforeunload</a
-            >
-            
-            <a
-              class="tag"
-              href="/tags/#unload"
-              title="unload"
-              >unload</a
+              href="/tags/#piglet"
+              title="piglet"
+              >piglet</a
             >
             
           </div>
-          <h1>关于 beforeunload/unload 的二三事</h1>
-          <h2 class="subheading"></h2>
+          <h1>Piglet Part3 - Tokens</h1>
+          <h2 class="subheading">A language named Piglet to describe the flow chart</h2>
           <span class="meta">
             Posted by
             
               kyuchan
             
-            on September 19, 2020
+            on February 1, 2020
           </span>
         </div>
       </div>
@@ -201,102 +194,144 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container" >
-        <p>在开发中我们也许会遇到这样的需求：即在用户离开当前页面的时候发送请求或者打点。自然我们需要对页面的 beforeunload/unload 事件去做一些事件监听。</p>
+        <h1 id="tokens">Tokens</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">();</span>
-<span class="p">}</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">unload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">log</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</code></pre></div></div>
+<h2 id="snippet-1">Snippet 1</h2>
 
-<p>事实上，由于页面已经被用户关闭了，你的请求可能并没有成功发送（Canceled）。</p>
+<pre><code class="language-piglet">init;
+if (failure) {
+  has error;
+  break;
+}
+submit;
+</code></pre>
 
-<p>如果对于浏览器的兼容性没有什么要求的话，不妨可以尝试一下 <code class="language-plaintext highlighter-rouge">navigator.sendBeacon</code> 这个 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator/sendBeacon">API</a>。</p>
+<p>↓↓↓</p>
 
-<blockquote>
-  <p>备注：在 unload 或者 beforeunload 事件处理器中发起一个同步 XMLHttpRequest 来发送数据已经不被 Chrome 支持（同步的 xhr 请求会阻塞页面关闭，带来不好的用户体验）。</p>
-</blockquote>
+<pre><code class="language-piglet">Token { type: 'node', value: 'init' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'keyword', value: 'if' },
+Token { type: 'punctuation', value: '(' },
+Token { type: 'node', value: 'failure' },
+Token { type: 'punctuation', value: ')' },
+Token { type: 'punctuation', value: '{' },
+Token { type: 'node', value: 'has error' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'keyword', value: 'break' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'punctuation', value: '}' },
+Token { type: 'node', value: 'submit' },
+Token { type: 'punctuation', value: ';' }
+</code></pre>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nb">navigator</span><span class="p">.</span><span class="nx">sendBeacon</span><span class="p">(</span><span class="dl">'</span><span class="s1">/log</span><span class="dl">'</span><span class="p">,</span> <span class="nx">analyticsData</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">unload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">log</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</code></pre></div></div>
+<h2 id="snippet-2">Snippet 2</h2>
 
-<h1 id="confirm-dialog">Confirm dialog</h1>
+<pre><code class="language-piglet">switch (num) {
+  case 1:
+    something for 1;
+    break;
+  case 2:
+    something for 2;
+  default:
+    something default;
+}
 
-<p><img width="300" src="https://kyuch4n.github.io/assets/beforeunload-dialog.png" /></p>
+something last;
+</code></pre>
 
-<p>如果用户此时正在编辑一些重要的信息，希望在用户离开或者刷新页面前进行二次确认，这又该如何呢？我们还可以监听 beforeunload 事件弹出确认对话框。</p>
+<p>↓↓↓</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">beforeunload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="c1">// Cancel the event as stated by the standard.</span>
-  <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-  <span class="c1">// Chrome requires returnValue to be set.</span>
-  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
-<span class="p">});</span>
-</code></pre></div></div>
+<pre><code class="language-piglet">Token { type: 'keyword', value: 'switch' },
+Token { type: 'punctuation', value: '(' },
+Token { type: 'node', value: 'num' },
+Token { type: 'punctuation', value: ')' },
+Token { type: 'punctuation', value: '{' },
+Token { type: 'keyword', value: 'case' },
+Token { type: 'node', value: '1' },
+Token { type: 'punctuation', value: ':' },
+Token { type: 'node', value: 'something for 1' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'keyword', value: 'break' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'keyword', value: 'case' },
+Token { type: 'node', value: '2' },
+Token { type: 'punctuation', value: ':' },
+Token { type: 'node', value: 'something for 2' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'keyword', value: 'default' },
+Token { type: 'punctuation', value: ':' },
+Token { type: 'node', value: 'something default' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'punctuation', value: '}' },
+Token { type: 'node', value: 'something last' },
+Token { type: 'punctuation', value: ';' }
+</code></pre>
 
-<p>同时在 unload 事件回调里通过 <code class="language-plaintext highlighter-rouge">navigator.sendBeacon</code> 发送请求。</p>
+<h2 id="snippet-3">Snippet 3</h2>
 
-<h1 id="further-more">Further more</h1>
+<pre><code class="language-piglet">if (a) {
+  something for A;
+} elif (b) {
+  something for B;
+} else {
+  something else;
+}
 
-<p>如果我们对于浏览器的兼容性还要有一定要求的（不能直接使用 sendBeacon API），或者在发送离开页面的请求之后我们还需要做一些请求的回调处理怎么办 😰？</p>
+something last;
+</code></pre>
 
-<p>无奈之下我们只能<strong>将请求置于 beforeunload 的事件回调之中</strong>。这样，在弹窗进行二次确认的时请求会正常发送，而<strong>在 unload 执行前的事件循环里面执行请求的回调</strong>。</p>
+<p>↓↓↓</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">beforeunload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="c1">// Cancel the event as stated by the standard.</span>
-  <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<pre><code class="language-piglet">Token { type: 'keyword', value: 'if' },
+Token { type: 'punctuation', value: '(' },
+Token { type: 'node', value: 'a' },
+Token { type: 'punctuation', value: ')' },
+Token { type: 'punctuation', value: '{' },
+Token { type: 'node', value: 'something for A' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'punctuation', value: '}' },
+Token { type: 'keyword', value: 'elif' },
+Token { type: 'punctuation', value: '(' },
+Token { type: 'node', value: 'b' },
+Token { type: 'punctuation', value: ')' },
+Token { type: 'punctuation', value: '{' },
+Token { type: 'node', value: 'something for B' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'punctuation', value: '}' },
+Token { type: 'keyword', value: 'else' },
+Token { type: 'punctuation', value: '{' },
+Token { type: 'node', value: 'something else' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'punctuation', value: '}' },
+Token { type: 'node', value: 'something last' },
+Token { type: 'punctuation', value: ';' }
+</code></pre>
 
-  <span class="c1">// Ajax</span>
-  <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-    <span class="c1">// options</span>
-  <span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// 回调处理</span>
-    <span class="c1">// do sth....</span>
-  <span class="p">});</span>
+<h2 id="snippet-4">Snippet 4</h2>
 
-  <span class="c1">// Chrome requires returnValue to be set.</span>
-  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
-<span class="p">});</span>
-</code></pre></div></div>
+<pre><code class="language-piglet">init;
+do {
+  retry;
+} while (failure)
+submit;
+</code></pre>
 
-<h1 id="another-question">Another question</h1>
+<p>↓↓↓</p>
 
-<p>不幸的是，这也引入了新的问题：<strong>用户取消/确定，没有回调 API，无法得知</strong>。于是即便用户取消了关闭操作、停留在当前页面，仍旧会发送请求、触发回调。</p>
-
-<p>如果你的请求是可以被 <strong>revert</strong> 的（A → B → A），那我们还可以通过一些小 <strong>trick</strong> 判断出用户仍然停留在当前页面，从而重置状态。</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">beforeunload</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="c1">// Cancel the event as stated by the standard.</span>
-  <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
-
-  <span class="c1">// Ajax</span>
-  <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-    <span class="c1">// options</span>
-  <span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="c1">// 回调处理</span>
-      <span class="c1">// do sth...</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="c1">// revert</span>
-        <span class="c1">// do sth...</span>
-      <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
-    <span class="p">});</span>
-
-  <span class="c1">// Chrome requires returnValue to be set.</span>
-  <span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
-<span class="p">});</span>
-</code></pre></div></div>
-
-<p>如果用户停留在了当前页面，在用户取消了弹窗的 1s 后，我们的 setTimeout 逻辑将会触发，这时我们可以进行请求的 revert；如果用户选择了离开，则不会触发 setTimeout 逻辑。</p>
-
-<h1 id="at-last">At last</h1>
-
-<p>不幸的是，如果请求无法被 revert，而离开时的需求逻辑又比较复杂，我也暂时没想到什么特别好的方法。（不如考虑改一下产品逻辑……</p>
+<pre><code class="language-piglet">Token { type: 'node', value: 'init' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'keyword', value: 'do' },
+Token { type: 'punctuation', value: '{' },
+Token { type: 'node', value: 'retry' },
+Token { type: 'punctuation', value: ';' },
+Token { type: 'punctuation', value: '}' },
+Token { type: 'keyword', value: 'while' },
+Token { type: 'punctuation', value: '(' },
+Token { type: 'node', value: 'failure' },
+Token { type: 'punctuation', value: ')' },
+Token { type: 'node', value: 'submit' },
+Token { type: 'punctuation', value: ';'
+</code></pre>
 
         
         <hr />
@@ -304,10 +339,10 @@
           
           <li class="previous">
             <a
-              href="/2020/08/22/electron-todolist/"
+              href="/2020/02/01/0800/"
               data-toggle="tooltip"
               data-placement="top"
-              title="Electron 实现 ToDoList"
+              title="Piglet Part2 - Tutorial"
             >
               &larr; Previous Post
             </a>
@@ -316,10 +351,10 @@
           
           <li class="next">
             <a 
-              href="/2020/10/24/project-optimize-01/" 
+              href="/2020/02/01/1000/" 
               data-toggle="tooltip" 
               data-placement="top" 
-              title="「BLOG」项目优化 (上) - 工程化"
+              title="Piglet Part4 - AST"
             >
               Next Post &rarr;
             </a>
