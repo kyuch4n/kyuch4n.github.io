@@ -1,7 +1,12 @@
-const VER = '1603807087752'; // timestamp
-const CACHE_NAME = 'KYU_SW_' + VER;
+'use strict';
 
-const URL_TO_CACHE = [
+/**
+ * !!!
+ * @VER will be replaced to the latest timestamp when build
+ */
+var VER = 1603981920294;
+var CACHE_NAME = 'KYU_SW_' + VER;
+var URL_TO_CACHE = [
   '/assets/home.jpg',
   '/css/framework.css',
   '/css/syntax.css',
@@ -10,6 +15,7 @@ const URL_TO_CACHE = [
   '/js/jquery.js',
   '/js/bootstrap.js',
 ];
+
 self.addEventListener('install', function(event) {
   console.log('[ServiceWorker] Install');
   event.waitUntil(
@@ -35,39 +41,50 @@ self.addEventListener('activate', function(event) {
       );
     }),
   );
-
   return self.clients.claim();
 });
 
-const DOMAIN_BLACK_LIST = ['baidu.com'];
-const RESOURCE_WHITE_LIST = ['.jpg', '.png', '.js', '.css'];
-const enable = url => {
-  if (!DOMAIN_BLACK_LIST.find(i => ~url.indexOf(i))) {
-    if (RESOURCE_WHITE_LIST.find(i => ~url.indexOf(i))) {
+var DOMAIN_BLACK_LIST = ['baidu.com'];
+var RESOURCE_WHITE_LIST = ['.jpg', '.png', '.js', '.css'];
+
+var enable = function enable(url) {
+  if (
+    !DOMAIN_BLACK_LIST.find(function(i) {
+      return ~url.indexOf(i);
+    })
+  ) {
+    if (
+      RESOURCE_WHITE_LIST.find(function(i) {
+        return ~url.indexOf(i);
+      })
+    ) {
       return true;
     }
   }
+
   return false;
 };
 
 self.addEventListener('fetch', function(event) {
   event.respondWith(
-    caches.match(event.request).then(res => {
+    caches.match(event.request).then(function(res) {
       return (
         res ||
         fetch(event.request)
-          .then(responese => {
-            const url = event.request.url;
+          .then(function(responese) {
+            var url = event.request.url;
+
             if (enable(url)) {
               console.log('[ServiceWorker] Add to cache: ', url);
-              const responeseClone = responese.clone();
-              caches.open(CACHE_NAME).then(cache => {
+              var responeseClone = responese.clone();
+              caches.open(CACHE_NAME).then(function(cache) {
                 cache.put(event.request, responeseClone);
               });
             }
+
             return responese;
           })
-          .catch(err => {
+          .catch(function(err) {
             console.log(err);
           })
       );

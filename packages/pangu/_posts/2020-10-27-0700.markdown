@@ -1,0 +1,20 @@
+---
+layout: post
+title: '浏览器下载文件的一些方法'
+subtitle: ''
+date: 2020-10-27
+author: 'kyuchan'
+tags:
+  - download
+  - content type
+---
+
+- <a />的默认行为
+- <a  download/>什么时候会触发浏览器的下载
+- 如果要通过 js 做当前页面数据的导出及下载应该怎样搞 (js-file-download)
+- 对于一个链接，浏览器什么情况下会在预览，什么条件下会触发下载
+- 服务端 response 里面 attatchment 属性有什么功能
+
+- [🔗](https://cloud.tencent.com/developer/article/1488296)
+
+TO BE CONTINUS ...

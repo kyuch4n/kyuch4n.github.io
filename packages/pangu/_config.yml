@@ -16,11 +16,11 @@ github_username: kyuch4n
 
 highlighter: rouge
 permalink: pretty
-paginate: 5
+paginate: 8
 exclude: []
 plugins: [jekyll-paginate]
 markdown: kramdown
 kramdown:
   input: GFM
   # auto_ids: true
-
+exclude: ['less', 'scripts', 'package.json']

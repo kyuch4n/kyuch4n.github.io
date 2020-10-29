@@ -1,6 +1,6 @@
 ---
 layout: post
-title: '「BLOG」项目优化 (下) - 性能优化'
+title: '「BLOG」项目治理 (下) - 性能优化'
 subtitle: ''
 date: 2020-10-24
 author: 'kyuchan'

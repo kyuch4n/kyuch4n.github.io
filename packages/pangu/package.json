@@ -7,8 +7,9 @@
     "watch:jekyll": "jekyll serve --watch",
     "start": "run-p watch:less watch:jekyll",
     "build:less": "lessc less/framework.less css/framework.css",
+    "build:sw": "node scripts/gen-sw.js",
     "build:jekyll": "jekyll build",
-    "build": "run-s build:less build:jekyll"
+    "build": "run-s build:sw build:less build:jekyll"
   },
   "dependencies": {
     "less": "^3.12.2",
