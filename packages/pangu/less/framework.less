@@ -37,6 +37,7 @@ a img {
   }
 }
 article {
+  display: flex;
   overflow-x: hidden;
 }
 blockquote {
@@ -428,6 +429,7 @@ pre code {
     .sans-serif;
     color: @gray;
     font-size: 16px;
+    font-weight: 200;
     margin-top: 0;
     > a {
       text-decoration: none;
@@ -457,6 +459,8 @@ pre code {
 }
 .post-content-preview {
   font-size: 13px;
+  font-style: italic;
+  font-weight: 100;
   color: #a3a3a3;
   &:hover {
     color: @brand-primary;
@@ -675,11 +679,6 @@ img::-moz-selection {
     font-size: 14px;
   }
 }
-.t {
-  &:first-child {
-    margin-top: 0px;
-  }
-}
 .listing-seperator {
   color: #0085a1;
   font-size: 21px !important;
@@ -708,14 +707,6 @@ img::-moz-selection {
         font-size: 12px;
       }
     }
-    > .post-meta {
-      position: absolute;
-      right: 5px;
-      bottom: 0px;
-      margin: 0px;
-      font-size: 12px;
-      line-height: 12px;
-    }
     @media only screen and(min-width:768px) {
       margin-left: 20px;
       > a {
@@ -726,9 +717,6 @@ img::-moz-selection {
         > .post-subtitle {
           font-size: 14px;
         }
-      }
-      .post-meta {
-        font-size: 18px;
       }
     }
   }

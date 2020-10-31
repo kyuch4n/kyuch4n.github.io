@@ -24,7 +24,7 @@ View [http://127.0.0.1:4000/](http://127.0.0.1:4000/).
 
 #### Start up
 
-A umi project, see more detail at [Umi 官方文档](https://umijs.org/zh-CN/docs).
+A create-react-app project.
 
 ```shell
 > yarn start

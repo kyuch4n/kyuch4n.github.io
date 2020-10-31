@@ -16,7 +16,7 @@ cp -rf _site $CWD/build
 cd $CWD/packages/shennong
 yarn build
 # Copy Build Files
-cp -rf dist $CWD/build/lab
+cp -rf build $CWD/build/lab
 
 # Regen Sitemap (Not Real Time)
 echo '>>>>>>>>>>>>>>>>>>>>'

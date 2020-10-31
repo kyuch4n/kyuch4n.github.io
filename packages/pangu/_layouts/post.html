@@ -41,7 +41,7 @@ layout: default
 <article>
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container" >
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
         {{ content }}
         {% if page.previous.url || page.next.url %}
         <hr />
@@ -73,6 +73,10 @@ layout: default
         </ul>
         {% endif %}
       </div>
+      <div
+        id="table-of-content"
+        class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container"
+      ></div>
     </div>
   </div>
 </article>

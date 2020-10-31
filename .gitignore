@@ -14,8 +14,4 @@
 /packages/pangu/.jekyll-cache
 
 # shennong
-/packages/shennong/src/.umi
-/packages/shennong/src/.umi-production
-/packages/shennong/src/.umi-test
-/packages/shennong/.env.local
-/packages/shennong/dist
+/packages/shennong/build
