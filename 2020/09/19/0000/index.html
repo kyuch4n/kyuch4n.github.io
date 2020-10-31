@@ -39,6 +39,10 @@
   <!-- Custom CSS -->
   <!-- WARNING: Must after bootstrap.css to cover style -->
   <link rel="stylesheet" href="/css/framework.css" />
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+<!-- widgets -->
+<script src="/js/table-of-content.js"></script>
   <!-- Preload Img -->
 <link rel="preload" href="/assets/home.jpg" as="image" />
 <link rel="preload" href="/assets/post.jpg" as="image" />
@@ -200,7 +204,7 @@
 <article>
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container" >
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
         <p>在开发中我们也许会遇到这样的需求：即在用户离开当前页面的时候发送请求或者打点。自然我们需要对页面的 beforeunload/unload 事件去做一些事件监听。</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
@@ -319,7 +323,7 @@
               href="/2020/10/24/0700/" 
               data-toggle="tooltip" 
               data-placement="top" 
-              title="「BLOG」项目治理 (上) - 工程化"
+              title="「BLOG」 项目治理 (上) - 工程化"
             >
               Next Post &rarr;
             </a>
@@ -328,6 +332,10 @@
         </ul>
         
       </div>
+      <div
+        id="table-of-content"
+        class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container"
+      ></div>
     </div>
   </div>
 </article>

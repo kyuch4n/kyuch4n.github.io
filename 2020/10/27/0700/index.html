@@ -39,6 +39,10 @@
   <!-- Custom CSS -->
   <!-- WARNING: Must after bootstrap.css to cover style -->
   <link rel="stylesheet" href="/css/framework.css" />
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+<!-- widgets -->
+<script src="/js/table-of-content.js"></script>
   <!-- Preload Img -->
 <link rel="preload" href="/assets/home.jpg" as="image" />
 <link rel="preload" href="/assets/post.jpg" as="image" />
@@ -200,7 +204,7 @@
 <article>
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container" >
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
         <ul>
   <li><a></a>的默认行为</li>
   <li><a download=""></a>什么时候会触发浏览器的下载</li>
@@ -223,7 +227,7 @@
               href="/2020/10/24/0800/"
               data-toggle="tooltip"
               data-placement="top"
-              title="「BLOG」项目治理 (下) - 性能优化"
+              title="「BLOG」 项目治理 (下) - 性能优化"
             >
               &larr; Previous Post
             </a>
@@ -244,6 +248,10 @@
         </ul>
         
       </div>
+      <div
+        id="table-of-content"
+        class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container"
+      ></div>
     </div>
   </div>
 </article>

@@ -39,6 +39,10 @@
   <!-- Custom CSS -->
   <!-- WARNING: Must after bootstrap.css to cover style -->
   <link rel="stylesheet" href="/css/framework.css" />
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+<!-- widgets -->
+<script src="/js/table-of-content.js"></script>
   <!-- Preload Img -->
 <link rel="preload" href="/assets/home.jpg" as="image" />
 <link rel="preload" href="/assets/post.jpg" as="image" />
@@ -178,233 +182,231 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-  <div id="tag_cloud" class="tags">
-    
-    <a href="#piglet" title="piglet" rel="4">piglet</a>
-    
-    <a href="#electron" title="electron" rel="1">electron</a>
-    
-    <a href="#beforeunload" title="beforeunload" rel="2">beforeunload</a>
-    
-    <a href="#unload" title="unload" rel="2">unload</a>
-    
-    <a href="#monorepo" title="monorepo" rel="1">monorepo</a>
-    
-    <a href="#performance optimization" title="performance optimization" rel="1">performance optimization</a>
-    
-    <a href="#download" title="download" rel="1">download</a>
-    
-    <a href="#content type" title="content type" rel="1">content type</a>
-    
-    <a href="#service worker" title="service worker" rel="1">service worker</a>
-    
-  </div>
+      <div id="tag_cloud" class="tags">
   
-  <div class="one-tag-list">
-    <span class="fa fa-tag listing-seperator" id="piglet">
-      <span class="tag-text">piglet</span>
-    </span>
-    
-    <div class="post-preview">
-      <a href="/2020/02/01/1000/">
-        <h2 class="post-title">Piglet Part4 - AST</h2>
-        
-        <h3 class="post-subtitle">A language named Piglet to describe the flow chart</h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-    <div class="post-preview">
-      <a href="/2020/02/01/0900/">
-        <h2 class="post-title">Piglet Part3 - Tokens</h2>
-        
-        <h3 class="post-subtitle">A language named Piglet to describe the flow chart</h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-    <div class="post-preview">
-      <a href="/2020/02/01/0800/">
-        <h2 class="post-title">Piglet Part2 - Tutorial</h2>
-        
-        <h3 class="post-subtitle">A language named Piglet to describe the flow chart</h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-    <div class="post-preview">
-      <a href="/2020/02/01/0700/">
-        <h2 class="post-title">Piglet Part1 - Examples</h2>
-        
-        <h3 class="post-subtitle">A language named Piglet to describe the flow chart</h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-  </div>
+  <a href="#piglet" title="piglet" rel="4">piglet</a>
   
-  <div class="one-tag-list">
-    <span class="fa fa-tag listing-seperator" id="electron">
-      <span class="tag-text">electron</span>
-    </span>
-    
-    <div class="post-preview">
-      <a href="/2020/08/22/0000/">
-        <h2 class="post-title">Electron 实现 ToDoList</h2>
-        
-        <h3 class="post-subtitle"></h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-  </div>
+  <a href="#electron" title="electron" rel="1">electron</a>
   
-  <div class="one-tag-list">
-    <span class="fa fa-tag listing-seperator" id="beforeunload">
-      <span class="tag-text">beforeunload</span>
-    </span>
-    
-    <div class="post-preview">
-      <a href="/2020/10/28/0700/">
-        <h2 class="post-title">使用 Service Worker 监听 Unload 事件</h2>
-        
-        <h3 class="post-subtitle"></h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-    <div class="post-preview">
-      <a href="/2020/09/19/0000/">
-        <h2 class="post-title">关于 beforeunload/unload 的二三事</h2>
-        
-        <h3 class="post-subtitle"></h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-  </div>
+  <a href="#beforeunload" title="beforeunload" rel="2">beforeunload</a>
   
-  <div class="one-tag-list">
-    <span class="fa fa-tag listing-seperator" id="unload">
-      <span class="tag-text">unload</span>
-    </span>
-    
-    <div class="post-preview">
-      <a href="/2020/10/28/0700/">
-        <h2 class="post-title">使用 Service Worker 监听 Unload 事件</h2>
-        
-        <h3 class="post-subtitle"></h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-    <div class="post-preview">
-      <a href="/2020/09/19/0000/">
-        <h2 class="post-title">关于 beforeunload/unload 的二三事</h2>
-        
-        <h3 class="post-subtitle"></h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-  </div>
+  <a href="#unload" title="unload" rel="2">unload</a>
   
-  <div class="one-tag-list">
-    <span class="fa fa-tag listing-seperator" id="monorepo">
-      <span class="tag-text">monorepo</span>
-    </span>
-    
-    <div class="post-preview">
-      <a href="/2020/10/24/0700/">
-        <h2 class="post-title">「BLOG」项目治理 (上) - 工程化</h2>
-        
-        <h3 class="post-subtitle"></h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-  </div>
+  <a href="#monorepo" title="monorepo" rel="1">monorepo</a>
   
-  <div class="one-tag-list">
-    <span class="fa fa-tag listing-seperator" id="performance optimization">
-      <span class="tag-text">performance optimization</span>
-    </span>
-    
-    <div class="post-preview">
-      <a href="/2020/10/24/0800/">
-        <h2 class="post-title">「BLOG」项目治理 (下) - 性能优化</h2>
-        
-        <h3 class="post-subtitle"></h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-  </div>
+  <a href="#performance optimization" title="performance optimization" rel="1">performance optimization</a>
   
-  <div class="one-tag-list">
-    <span class="fa fa-tag listing-seperator" id="download">
-      <span class="tag-text">download</span>
-    </span>
-    
-    <div class="post-preview">
-      <a href="/2020/10/27/0700/">
-        <h2 class="post-title">浏览器下载文件的一些方法</h2>
-        
-        <h3 class="post-subtitle"></h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-  </div>
+  <a href="#download" title="download" rel="1">download</a>
   
-  <div class="one-tag-list">
-    <span class="fa fa-tag listing-seperator" id="content type">
-      <span class="tag-text">content type</span>
-    </span>
-    
-    <div class="post-preview">
-      <a href="/2020/10/27/0700/">
-        <h2 class="post-title">浏览器下载文件的一些方法</h2>
-        
-        <h3 class="post-subtitle"></h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-  </div>
+  <a href="#content type" title="content type" rel="1">content type</a>
   
-  <div class="one-tag-list">
-    <span class="fa fa-tag listing-seperator" id="service worker">
-      <span class="tag-text">service worker</span>
-    </span>
-    
-    <div class="post-preview">
-      <a href="/2020/10/28/0700/">
-        <h2 class="post-title">使用 Service Worker 监听 Unload 事件</h2>
-        
-        <h3 class="post-subtitle"></h3>
-        
-      </a>
-    </div>
-    <hr />
-    
-  </div>
+  <a href="#service worker" title="service worker" rel="1">service worker</a>
   
 </div>
+
+<div class="one-tag-list">
+  <span class="fa fa-tag listing-seperator" id="piglet">
+    <span class="tag-text">piglet</span>
+  </span>
+  
+  <div class="post-preview">
+    <a href="/2020/02/01/1000/">
+      <h2 class="post-title">Piglet Part4 - AST</h2>
+      
+      <h3 class="post-subtitle">A language named Piglet to describe the flow chart</h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+  <div class="post-preview">
+    <a href="/2020/02/01/0900/">
+      <h2 class="post-title">Piglet Part3 - Tokens</h2>
+      
+      <h3 class="post-subtitle">A language named Piglet to describe the flow chart</h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+  <div class="post-preview">
+    <a href="/2020/02/01/0800/">
+      <h2 class="post-title">Piglet Part2 - Tutorial</h2>
+      
+      <h3 class="post-subtitle">A language named Piglet to describe the flow chart</h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+  <div class="post-preview">
+    <a href="/2020/02/01/0700/">
+      <h2 class="post-title">Piglet Part1 - Examples</h2>
+      
+      <h3 class="post-subtitle">A language named Piglet to describe the flow chart</h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+</div>
+
+<div class="one-tag-list">
+  <span class="fa fa-tag listing-seperator" id="electron">
+    <span class="tag-text">electron</span>
+  </span>
+  
+  <div class="post-preview">
+    <a href="/2020/08/22/0000/">
+      <h2 class="post-title">Electron 实现 ToDoList</h2>
+      
+      <h3 class="post-subtitle"></h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+</div>
+
+<div class="one-tag-list">
+  <span class="fa fa-tag listing-seperator" id="beforeunload">
+    <span class="tag-text">beforeunload</span>
+  </span>
+  
+  <div class="post-preview">
+    <a href="/2020/10/28/0700/">
+      <h2 class="post-title">使用 Service Worker 监听 Unload 事件</h2>
+      
+      <h3 class="post-subtitle"></h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+  <div class="post-preview">
+    <a href="/2020/09/19/0000/">
+      <h2 class="post-title">关于 beforeunload/unload 的二三事</h2>
+      
+      <h3 class="post-subtitle"></h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+</div>
+
+<div class="one-tag-list">
+  <span class="fa fa-tag listing-seperator" id="unload">
+    <span class="tag-text">unload</span>
+  </span>
+  
+  <div class="post-preview">
+    <a href="/2020/10/28/0700/">
+      <h2 class="post-title">使用 Service Worker 监听 Unload 事件</h2>
+      
+      <h3 class="post-subtitle"></h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+  <div class="post-preview">
+    <a href="/2020/09/19/0000/">
+      <h2 class="post-title">关于 beforeunload/unload 的二三事</h2>
+      
+      <h3 class="post-subtitle"></h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+</div>
+
+<div class="one-tag-list">
+  <span class="fa fa-tag listing-seperator" id="monorepo">
+    <span class="tag-text">monorepo</span>
+  </span>
+  
+  <div class="post-preview">
+    <a href="/2020/10/24/0700/">
+      <h2 class="post-title">「BLOG」 项目治理 (上) - 工程化</h2>
+      
+      <h3 class="post-subtitle"></h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+</div>
+
+<div class="one-tag-list">
+  <span class="fa fa-tag listing-seperator" id="performance optimization">
+    <span class="tag-text">performance optimization</span>
+  </span>
+  
+  <div class="post-preview">
+    <a href="/2020/10/24/0800/">
+      <h2 class="post-title">「BLOG」 项目治理 (下) - 性能优化</h2>
+      
+      <h3 class="post-subtitle"></h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+</div>
+
+<div class="one-tag-list">
+  <span class="fa fa-tag listing-seperator" id="download">
+    <span class="tag-text">download</span>
+  </span>
+  
+  <div class="post-preview">
+    <a href="/2020/10/27/0700/">
+      <h2 class="post-title">浏览器下载文件的一些方法</h2>
+      
+      <h3 class="post-subtitle"></h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+</div>
+
+<div class="one-tag-list">
+  <span class="fa fa-tag listing-seperator" id="content type">
+    <span class="tag-text">content type</span>
+  </span>
+  
+  <div class="post-preview">
+    <a href="/2020/10/27/0700/">
+      <h2 class="post-title">浏览器下载文件的一些方法</h2>
+      
+      <h3 class="post-subtitle"></h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+</div>
+
+<div class="one-tag-list">
+  <span class="fa fa-tag listing-seperator" id="service worker">
+    <span class="tag-text">service worker</span>
+  </span>
+  
+  <div class="post-preview">
+    <a href="/2020/10/28/0700/">
+      <h2 class="post-title">使用 Service Worker 监听 Unload 事件</h2>
+      
+      <h3 class="post-subtitle"></h3>
+      
+    </a>
+  </div>
+  <hr />
+  
+</div>
+
 
     </div>
   </div>

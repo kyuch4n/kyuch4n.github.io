@@ -9,47 +9,8 @@
     padding-right: 5%;
   }
 }
-.sidebar-container {
-  color: #bfbfbf;
-  font-size: 14px;
-}
-.sidebar-container h5 {
-  color: #808080;
-  padding-bottom: 1em;
-}
-.sidebar-container h5 a {
-  color: #808080 !important;
-  text-decoration: none;
-}
-.sidebar-container a {
-  color: #bfbfbf !important;
-}
-.sidebar-container a:hover,
-.sidebar-container a:active {
-  color: #0085a1 !important;
-}
-.sidebar-container .tags a {
-  border-color: #bfbfbf;
-}
-.sidebar-container .tags a:hover,
-.sidebar-container .tags a:active {
-  border-color: #0085a1;
-}
-.sidebar-container .short-about img {
-  width: 80%;
-  display: block;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-.sidebar-container .short-about p {
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
-.sidebar-container .short-about .list-inline > li {
-  padding-left: 0px;
-}
 body {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
   line-height: 1.7;
   font-size: 16px;
   color: #404040;
@@ -64,7 +25,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
   line-height: 1.7;
   line-height: 1.1;
   font-weight: bold;
@@ -84,6 +45,7 @@ a img:focus {
   cursor: zoom-in;
 }
 article {
+  display: flex;
   overflow-x: hidden;
 }
 blockquote {
@@ -260,7 +222,7 @@ pre code {
   left: 0;
   width: 100%;
   z-index: 3;
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
   line-height: 1.7;
 }
 .navbar-custom .navbar-brand {
@@ -402,7 +364,7 @@ pre code {
 }
 .intro-header .site-heading .subheading,
 .intro-header .page-heading .subheading {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
   line-height: 1.7;
   font-size: 18px;
   line-height: 1.1;
@@ -426,7 +388,7 @@ pre code {
   display: block;
 }
 .intro-header .post-heading .subheading {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
   line-height: 1.7;
   font-size: 17px;
   line-height: 1.4;
@@ -435,7 +397,7 @@ pre code {
   margin-top: -5px;
 }
 .intro-header .post-heading .meta {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
   line-height: 1.7;
   font-weight: 300;
   font-size: 18px;
@@ -476,10 +438,11 @@ pre code {
   margin-bottom: 10px;
 }
 .post-preview > .post-meta {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
   line-height: 1.7;
   color: #808080;
   font-size: 16px;
+  font-weight: 200;
   margin-top: 0;
 }
 .post-preview > .post-meta > a {
@@ -506,6 +469,8 @@ pre code {
 }
 .post-content-preview {
   font-size: 13px;
+  font-style: italic;
+  font-weight: 100;
   color: #a3a3a3;
 }
 .post-content-preview:hover {
@@ -587,7 +552,7 @@ form .row:first-child .floating-label-form-group {
   border-top: 1px solid #eee;
 }
 .btn {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
   line-height: 1.7;
   text-transform: uppercase;
   font-size: 14px;
@@ -612,7 +577,7 @@ form .row:first-child .floating-label-form-group {
 }
 .pager li > a,
 .pager li > span {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
   line-height: 1.7;
   text-transform: uppercase;
   font-size: 13px;
@@ -734,9 +699,6 @@ img::-moz-selection {
     font-size: 14px;
   }
 }
-.t:first-child {
-  margin-top: 0px;
-}
 .listing-seperator {
   color: #0085a1;
   font-size: 21px !important;
@@ -752,7 +714,7 @@ img::-moz-selection {
 }
 .one-tag-list .tag-text {
   font-weight: 200;
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'Microsoft JhengHei', 'Source Han Sans SC', 'Noto Sans CJK SC', 'Source Han Sans CN', 'Noto Sans SC', 'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', SimSun, sans-serif;
   line-height: 1.7;
 }
 .one-tag-list .post-preview {
@@ -766,14 +728,6 @@ img::-moz-selection {
 .one-tag-list .post-preview > a .post-subtitle {
   font-size: 12px;
 }
-.one-tag-list .post-preview > .post-meta {
-  position: absolute;
-  right: 5px;
-  bottom: 0px;
-  margin: 0px;
-  font-size: 12px;
-  line-height: 12px;
-}
 @media only screen and (min-width: 768px) {
   .one-tag-list .post-preview {
     margin-left: 20px;
@@ -784,9 +738,6 @@ img::-moz-selection {
   }
   .one-tag-list .post-preview > a > .post-subtitle {
     font-size: 14px;
-  }
-  .one-tag-list .post-preview .post-meta {
-    font-size: 18px;
   }
 }
 .post-container img {

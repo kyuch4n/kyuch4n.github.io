@@ -39,6 +39,10 @@
   <!-- Custom CSS -->
   <!-- WARNING: Must after bootstrap.css to cover style -->
   <link rel="stylesheet" href="/css/framework.css" />
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+<!-- widgets -->
+<script src="/js/table-of-content.js"></script>
   <!-- Preload Img -->
 <link rel="preload" href="/assets/home.jpg" as="image" />
 <link rel="preload" href="/assets/post.jpg" as="image" />
@@ -193,7 +197,7 @@
 <article>
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container" >
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
         <h1 id="tokens">Tokens</h1>
 
 <h2 id="snippet-1">Snippet 1</h2>
@@ -363,6 +367,10 @@ Token { type: 'punctuation', value: ';'
         </ul>
         
       </div>
+      <div
+        id="table-of-content"
+        class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container"
+      ></div>
     </div>
   </div>
 </article>
