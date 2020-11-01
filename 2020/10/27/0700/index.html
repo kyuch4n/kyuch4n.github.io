@@ -204,18 +204,132 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-        <ul>
-  <li><a></a>的默认行为</li>
-  <li><a download=""></a>什么时候会触发浏览器的下载</li>
-  <li>如果要通过 js 做当前页面数据的导出及下载应该怎样搞 (js-file-download)</li>
-  <li>对于一个链接，浏览器什么情况下会在预览，什么条件下会触发下载</li>
-  <li>
-    <p>服务端 response 里面 attatchment 属性有什么功能</p>
-  </li>
-  <li><a href="https://cloud.tencent.com/developer/article/1488296">🔗</a></li>
+        <blockquote>
+  <p>站在巨人的肩膀上<a href="https://cloud.tencent.com/developer/article/1488296">「让浏览器下载文件的一些手段」</a>。</p>
+</blockquote>
+
+<p><a href="https://cloud.tencent.com/developer/article/1488296">「让浏览器下载文件的一些手段」</a> 对于如何实现文件下载已经做了很好的解说。总结起来有以下几种方法：</p>
+
+<h1 id="download-属性">download 属性</h1>
+
+<p>常规的 <code class="language-plaintext highlighter-rouge">&lt;a&gt;</code> 标签通过 href 实现链接跳转，如果只想下载文件而不是跳转预览，最好的方式是在 <code class="language-plaintext highlighter-rouge">&lt;a&gt;</code> 标签中添加 download 属性，就能很简单地实现下载操作。</p>
+
+<blockquote>
+  <p>但是注意：此属性仅适用于同源 URL。</p>
+</blockquote>
+
+<h1 id="content-disposition">content-disposition</h1>
+
+<p>前后端配合完成文件下载的业务场景下，可以通过设置响应头的 Content-Disposition 实现。</p>
+
+<p>Content-Disposition 决定了是以内联的形式（即网页或者页面的一部分），还是以附件的形式下载并保存到本地。</p>
+
+<ul>
+  <li>inline：默认值，表示回复中的消息体会以页面的一部分或者整个页面的形式展示。</li>
+  <li>attachment：消息体应该被下载到本地。大多数浏览器会呈现一个“保存为”的对话框，将 filename 的值预填为下载后的文件名。</li>
 </ul>
 
-<p>TO BE CONTINUS …</p>
+<h1 id="跨域下载">跨域下载</h1>
+
+<p>结合 Blob 和 Fetch，获取跨域资源返回一个 Blob 对象并生成一个 Blob URL，配合 <code class="language-plaintext highlighter-rouge">&lt;a&gt;</code> 标签的 download 属性触发下载。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">download</span><span class="p">(</span><span class="nx">href</span><span class="p">,</span> <span class="nx">filename</span> <span class="o">=</span> <span class="dl">''</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">a</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="nx">filename</span><span class="p">;</span>
+  <span class="nx">a</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">href</span><span class="p">;</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+  <span class="nx">a</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+  <span class="nx">a</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">downloadFile</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">filename</span> <span class="o">=</span> <span class="dl">''</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">({</span>
+      <span class="na">Origin</span><span class="p">:</span> <span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="na">mode</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cors</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">blob</span><span class="p">())</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">blob</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">blobUrl</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
+      <span class="nx">download</span><span class="p">(</span><span class="nx">blobUrl</span><span class="p">,</span> <span class="nx">filename</span><span class="p">);</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">revokeObjectURL</span><span class="p">(</span><span class="nx">blobUrl</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>注意：跨域资源所在的服务器需要配置 Access-Control-Allow-Origin。</p>
+</blockquote>
+
+<h1 id="额外做一些补充">额外做一些补充</h1>
+
+<p>如何动态下载当前页面的内容，例如导出表格？</p>
+
+<h2 id="动态下载">动态下载</h2>
+
+<p>同样我们可以基于 Blob URL 和 data URL 实现，并且已经有现成的 NPM 包 - <a href="https://www.npmjs.com/package/js-file-download">js-file-download</a>。源码如下（实现方式相同）：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">filename</span><span class="p">,</span> <span class="nx">mime</span><span class="p">,</span> <span class="nx">bom</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">blobData</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">bom</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span> <span class="p">?</span> <span class="p">[</span><span class="nx">bom</span><span class="p">,</span> <span class="nx">data</span><span class="p">]</span> <span class="p">:</span> <span class="p">[</span><span class="nx">data</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">blob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">(</span><span class="nx">blobData</span><span class="p">,</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="nx">mime</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">application/octet-stream</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">.</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">msSaveBlob</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// IE workaround for "HTML7007: One or more blob URLs were</span>
+    <span class="c1">// revoked by closing the blob for which they were created.</span>
+    <span class="c1">// These URLs will no longer resolve as the data backing</span>
+    <span class="c1">// the URL has been freed."</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">msSaveBlob</span><span class="p">(</span><span class="nx">blob</span><span class="p">,</span> <span class="nx">filename</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">blobURL</span> <span class="o">=</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span> <span class="o">&amp;&amp;</span> <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span>
+        <span class="p">?</span> <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">)</span>
+        <span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">webkitURL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">tempLink</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">tempLink</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">none</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">tempLink</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">blobURL</span><span class="p">;</span>
+    <span class="nx">tempLink</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">download</span><span class="dl">'</span><span class="p">,</span> <span class="nx">filename</span><span class="p">);</span>
+    <span class="c1">// Safari thinks _blank anchor are pop ups. We only want to set _blank</span>
+    <span class="c1">// target if the browser does not support the HTML5 download attribute.</span>
+    <span class="c1">// This allows you to download files in desktop safari if pop up blocking</span>
+    <span class="c1">// is enabled.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">tempLink</span><span class="p">.</span><span class="nx">download</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">tempLink</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">target</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">_blank</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tempLink</span><span class="p">);</span>
+    <span class="nx">tempLink</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+    <span class="c1">// Fixes "webkit blob resource error 1"</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">tempLink</span><span class="p">);</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">revokeObjectURL</span><span class="p">(</span><span class="nx">blobURL</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="applicationoctet-stream">application/octet-stream</h2>
+
+<p><a href="https://www.npmjs.com/package/js-file-download">js-file-download</a> 的实现中将 Content-Type 设置为了 <code class="language-plaintext highlighter-rouge">application/octet-stream</code>。Content-Type 对于文件下载有什么影响呢？</p>
+
+<blockquote>
+  <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Type">Content-Type</a> 实体头部用于指示资源的 MIME 类型 media type 。</p>
+</blockquote>
+
+<p>在响应中，Content-Type 标头告诉客户端实际返回的内容的内容类型。对于 <code class="language-plaintext highlighter-rouge">text/html</code>/<code class="language-plaintext highlighter-rouge">application/xml</code> 这类浏览器可以直接预览的文件类型，当 content-disposition 没有特别的设置时，浏览器会默认进行预览。</p>
+
+<p>而对于浏览器无法识别或不支持预览的类型，如 text/csv，会触发 <strong>另存为</strong> 行为（文件下载），交由对应的应用程序执行。</p>
+
+<p><strong>所以某些时候修改 Content-Type 也能实现文件下载。</strong> 😏😏😏</p>
+
+<!-- 分割线 -->
+<hr />
+
+<h1 id="参考">参考</h1>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a">HTML &lt;a&gt; 元素</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Type">Content-Type</a></li>
+  <li><a href="https://cloud.tencent.com/developer/article/1488296">让浏览器下载文件的一些手段</a></li>
+</ul>
 
         <hr />
         <ul class="pager">
@@ -234,10 +348,10 @@
           
           <li class="next">
             <a 
-              href="/2020/10/28/0700/" 
+              href="/2020/11/01/1817/" 
               data-toggle="tooltip" 
               data-placement="top" 
-              title="使用 Service Worker 监听 Unload 事件"
+              title="XJBX No.1"
             >
               Next Post &rarr;
             </a>
