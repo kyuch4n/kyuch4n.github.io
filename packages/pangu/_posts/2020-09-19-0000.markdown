@@ -33,7 +33,7 @@ window.addEventListener('unload', log, false);
 
 # Confirm dialog
 
-<img width="300" src="{{ site.url }}/assets/beforeunload-dialog.png" />
+<img width="300" src="{{ site.url }}/assets/202009100000/beforeunload-dialog.png" />
 
 如果用户此时正在编辑一些重要的信息，希望在用户离开或者刷新页面前进行二次确认，这又该如何呢？我们还可以监听 beforeunload 事件弹出确认对话框。
 
