@@ -196,14 +196,165 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-        <p>TO BE CONTINUS …</p>
+        <h1 id="背景">背景</h1>
+
+<p>初代的「BLOG」项目基于 <a href="http://jekyllcn.com/">Jekyll</a> 进行搭建，将 Markdown、Liquid 和 HTML &amp; CSS 构建为可发布的静态网站。</p>
+
+<p>但相较于常用的 React、NPM 等工具，整体对于 Jekyll 的开发方式、插件体系不太熟悉（不想研究了…，所以对项目进行了一番改造。</p>
+
+<h1 id="目标">目标</h1>
 
 <ul>
-  <li>monorepo</li>
-  <li>lint、prettier</li>
-  <li>packages instruction</li>
-  <li>scripts</li>
+  <li><strong>一方面</strong> 保留了原来 post 的开发编译方式（Markdown -&gt; HTML），可以通过 md 快速编写 BLOG。</li>
+  <li><strong>另一方面</strong> 可以快速通过 React 开发组件或者页面，进行扩展。</li>
 </ul>
+
+<h1 id="方案">方案</h1>
+
+<p>将原来的 Jekyll 项目命名为 <code class="language-plaintext highlighter-rouge">pangu</code>，用于创建新的 blog；基于 <a href="https://reactjs.org/docs/create-a-new-react-app.html">create-react-app</a> 新增项目 <code class="language-plaintext highlighter-rouge">shennong</code>。两个项目通过 monorepo 进行管理。</p>
+
+<h2 id="monorepo">monorepo</h2>
+
+<p>monorepo 的优点：</p>
+
+<ul>
+  <li>代码集中管理，方便共享和调试</li>
+  <li>版本管理方便</li>
+  <li>共享依赖、工程配置</li>
+  <li>方便代码复用</li>
+  <li>多个项目相互协作时原子提交</li>
+  <li>……</li>
+</ul>
+
+<p>整体的目录结构</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── packages
+│      ├─ pangu
+│      └─ shennong
+├── scripts
+│      ├─ build.sh            # 项目构建脚本
+│      └─ sitemap.js          # 自动生成 sitemap.xml
+├── .prettierrc               # 全局 prettier 配置
+├── .prettierignore
+├── .gitignore                # 全局 .gitignore
+├── node_modules              # 整个项目只有一个外层 node_modules
+├── README.md
+└── package.json
+</code></pre></div></div>
+
+<h2 id="scripts">scripts</h2>
+
+<h3 id="global-build">Global build</h3>
+
+<p>主要流程：<code class="language-plaintext highlighter-rouge">Clear</code> → <code class="language-plaintext highlighter-rouge">Build pangu</code> → <code class="language-plaintext highlighter-rouge">Build shennong</code> → <code class="language-plaintext highlighter-rouge">Move</code> → <code class="language-plaintext highlighter-rouge">Build sitemap</code></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
+
+<span class="c"># Clear</span>
+<span class="nb">rm</span> <span class="nt">-rf</span> build
+<span class="nv">CWD</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">"</span> <span class="c"># /kyuch4n.github.io</span>
+
+<span class="c"># Pangu</span>
+<span class="c"># Build</span>
+<span class="nb">cd</span> <span class="nv">$CWD</span>/packages/pangu
+yarn build
+<span class="c"># Copy Build Files</span>
+<span class="nb">cp</span> <span class="nt">-rf</span> _site <span class="nv">$CWD</span>/build
+
+<span class="c"># Shennong</span>
+<span class="c"># Build</span>
+<span class="nb">cd</span> <span class="nv">$CWD</span>/packages/shennong
+yarn build
+<span class="c"># Copy Build Files</span>
+<span class="nb">cp</span> <span class="nt">-rf</span> build <span class="nv">$CWD</span>/build/lab
+
+<span class="c"># Regen Sitemap (Not Real Time)</span>
+<span class="nb">echo</span> <span class="s1">'&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;'</span>
+<span class="nb">echo</span> <span class="s1">'generate sitemap ...'</span>
+node <span class="nv">$CWD</span>/scripts/sitemap.js
+</code></pre></div></div>
+
+<p>在 build.sh 中分布调用 sub-package 各自的 build 脚本。</p>
+
+<p>构建完成后会通过 <code class="language-plaintext highlighter-rouge">cp</code> 将各个 package 的 build 文件拷贝至项目根目录的 /build 文件夹中。</p>
+
+<h3 id="pangu-build">Pangu build</h3>
+
+<p>通过 npm init 创建了 package.json，通过 npm scripts 进行构建。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">private</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">@kyu/pangu</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">version</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1.0.0</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">scripts</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">watch:less</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">nodemon -e less -x </span><span class="se">\"</span><span class="s2">yarn build:less</span><span class="se">\"</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">watch:widgets</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">nodemon -e jsx -x </span><span class="se">\"</span><span class="s2">yarn build:jsx</span><span class="se">\"</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">watch:jekyll</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">jekyll serve --watch</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">start</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">run-p watch:less watch:widgets watch:jekyll</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">build:less</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">lessc less/framework.less css/framework.css</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">build:jsx</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">npx babel widgets --out-dir js --presets react-app/prod</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">build:sw</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">node scripts/gen-sw.js</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">build:jekyll</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">jekyll build</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">build</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">run-s build:sw build:less build:jsx build:jekyll</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">dependencies</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">babel-cli</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">6</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">babel-preset-react-app</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">less</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^3.12.2</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">nodemon</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^2.0.6</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">npm-run-all</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">^4.1.5</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>并行构建 less &amp; jsx &amp; service-worker &amp; jekyll。</p>
+
+<h2 id="react-for-pangu">React for Pangu</h2>
+
+<p>额外解决的一个小问题是如何快速在 Pangu(Jekyll) 中开发 React 小组件呢？方案是通过 CDN 加载 react 脚本。</p>
+
+<p>具体方式可以参考 <a href="https://reactjs.org/docs/add-react-to-a-website.html">add-react-to-a-website</a>。基于该方式成功开发并引入了 table-of-contents(Post 目录)小组件。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/react@16/umd/react.production.min.js"</span> <span class="na">crossorigin</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"</span> <span class="na">crossorigin</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="c">&lt;!-- widgets --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/js/table-of-content.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">createElement</span><span class="p">,</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">React</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">TableOfContent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">useState</span><span class="p">();</span>
+
+  <span class="c1">// find all h1-h6 doms</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="c1">// listen page scroll</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">scrollHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{};</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">scroll</span><span class="dl">'</span><span class="p">,</span> <span class="nx">scrollHandler</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">window</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">scroll</span><span class="dl">'</span><span class="p">,</span> <span class="nx">scrollHandler</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+<span class="p">};</span>
+
+<span class="c1">// Mount</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">tableOfContentContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">#table-of-content</span><span class="dl">'</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">tableOfContentContainer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">TableOfContent</span><span class="p">),</span> <span class="nx">tableOfContentContainer</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h1 id="成果">成果</h1>
+
+<p>最终改造项目可见 <a href="https://github.com/kyuch4n/kyuch4n.github.io">Github Pro</a>。</p>
 
         <hr />
         <ul class="pager">

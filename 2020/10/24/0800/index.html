@@ -196,13 +196,38 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-        <p>TO BE CONTINUS …</p>
+        <p>主要做了两方面的优化：preload + service worker</p>
+
+<h1 id="preload">preload</h1>
 
 <ul>
-  <li>CDN</li>
-  <li>Preload、Prefetch</li>
-  <li>SW</li>
+  <li>通过 <code class="language-plaintext highlighter-rouge">preload</code> 属性，提前加载项目中的大图。</li>
+  <li>通过 <code class="language-plaintext highlighter-rouge">Google QuickLink</code> 预加载后续页面。</li>
 </ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Preload Img --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"preload"</span> <span class="na">href=</span><span class="s">"/assets/home.jpg"</span> <span class="na">as=</span><span class="s">"image"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"preload"</span> <span class="na">href=</span><span class="s">"/assets/post.jpg"</span> <span class="na">as=</span><span class="s">"image"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"preload"</span> <span class="na">href=</span><span class="s">"/assets/tags.jpg"</span> <span class="na">as=</span><span class="s">"image"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"preload"</span> <span class="na">href=</span><span class="s">"/assets/error.jpg"</span> <span class="na">as=</span><span class="s">"image"</span> <span class="nt">/&gt;</span>
+<span class="c">&lt;!-- Prefetch By Google QuickLink --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/quicklink"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">quicklink</span><span class="p">.</span><span class="nx">listen</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h1 id="service-worker">service worker</h1>
+
+<ol>
+  <li>sw <code class="language-plaintext highlighter-rouge">install</code> 时缓存部分 jpg、js、css 文件。</li>
+  <li>sw 升级时清空之前版本的缓存。</li>
+  <li>sw 拦截 <code class="language-plaintext highlighter-rouge">fetch</code>，基于 白名单 与 黑名单对请求结果进行缓存。</li>
+</ol>
+
+<p>具体 sw 文件可以参考 <a href="https://github.com/kyuch4n/kyuch4n.github.io/blob/master/packages/pangu/service-worker.js">service-worker.js</a>。</p>
 
         <hr />
         <ul class="pager">

@@ -194,14 +194,11 @@
     </h3>
     
     <div class="post-content-preview">
-      TO BE CONTINUS …
+      TO BE CONTINED …
 
 参考
 
-
-  🔗 - 1
-  🔗 - 2
-
+使用 Service Worker 监控页面卡死/崩溃如何监控网页崩溃？
 
     </div>
   </a>
@@ -254,14 +251,17 @@ TO BE CONTINUS …
     </h3>
     
     <div class="post-content-preview">
-      TO BE CONTINUS …
+      主要做了两方面的优化：preload + service worker
+
+preload
 
 
-  CDN
-  Preload、Prefetch
-  SW
+  通过 preload 属性，提前加载项目中的大图。
+  通过 Google QuickLink 预加载后续页面。
 
 
+&lt;!-- Preload Img --&gt;
+&lt;link rel="preload" href="/assets/home.jpg" as="image" /&gt...
     </div>
   </a>
   <p class="post-meta">
@@ -281,15 +281,16 @@ TO BE CONTINUS …
     </h3>
     
     <div class="post-content-preview">
-      TO BE CONTINUS …
+      背景
+
+初代的「BLOG」项目基于 Jekyll 进行搭建，将 Markdown、Liquid 和 HTML &amp; CSS 构建为可发布的静态网站。
+
+但相较于常用的 React、NPM 等工具，整体对于 Jekyll 的开发方式、插件体系不太熟悉（不想研究了…，所以对项目进行了一番改造。
+
+目标
 
 
-  monorepo
-  lint、prettier
-  packages instruction
-  scripts
-
-
+  一方面 保留了原来 post 的开发编译方式（Markdown -&gt; HT...
     </div>
   </a>
   <p class="post-meta">
