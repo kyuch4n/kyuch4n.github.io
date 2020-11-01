@@ -8,9 +8,163 @@ tags:
   - monorepo
 ---
 
-TO BE CONTINUS ...
+# 背景
 
-- monorepo
-- lint、prettier
-- packages instruction
-- scripts
+初代的「BLOG」项目基于 [Jekyll](http://jekyllcn.com/) 进行搭建，将 Markdown、Liquid 和 HTML & CSS 构建为可发布的静态网站。
+
+但相较于常用的 React、NPM 等工具，整体对于 Jekyll 的开发方式、插件体系不太熟悉（不想研究了...，所以对项目进行了一番改造。
+
+# 目标
+
+- **一方面** 保留了原来 post 的开发编译方式（Markdown -> HTML），可以通过 md 快速编写 BLOG。
+- **另一方面** 可以快速通过 React 开发组件或者页面，进行扩展。
+
+# 方案
+
+将原来的 Jekyll 项目命名为 `pangu`，用于创建新的 blog；基于 [create-react-app](https://reactjs.org/docs/create-a-new-react-app.html) 新增项目 `shennong`。两个项目通过 monorepo 进行管理。
+
+## monorepo
+
+monorepo 的优点：
+
+- 代码集中管理，方便共享和调试
+- 版本管理方便
+- 共享依赖、工程配置
+- 方便代码复用
+- 多个项目相互协作时原子提交
+- ......
+
+整体的目录结构
+
+```
+.
+├── packages
+│      ├─ pangu
+│      └─ shennong
+├── scripts
+│      ├─ build.sh            # 项目构建脚本
+│      └─ sitemap.js          # 自动生成 sitemap.xml
+├── .prettierrc               # 全局 prettier 配置
+├── .prettierignore
+├── .gitignore                # 全局 .gitignore
+├── node_modules              # 整个项目只有一个外层 node_modules
+├── README.md
+└── package.json
+```
+
+## scripts
+
+### global build
+
+主要流程：`Clear` → `Build pangu` → `Build shennong` → `Move` → `Build sitemap`
+
+```shell
+#!/usr/bin/env bash
+
+# Clear
+rm -rf build
+CWD="$(pwd)" # /kyuch4n.github.io
+
+# Pangu
+# Build
+cd $CWD/packages/pangu
+yarn build
+# Copy Build Files
+cp -rf _site $CWD/build
+
+# Shennong
+# Build
+cd $CWD/packages/shennong
+yarn build
+# Copy Build Files
+cp -rf build $CWD/build/lab
+
+# Regen Sitemap (Not Real Time)
+echo '>>>>>>>>>>>>>>>>>>>>'
+echo 'generate sitemap ...'
+node $CWD/scripts/sitemap.js
+```
+
+在 build.sh 中分布调用 sub-package 各自的 build 脚本。
+
+构建完成后会通过 `cp` 将各个 package 的 build 文件拷贝至项目根目录的 /build 文件夹中。
+
+### pangu build
+
+通过 npm init 创建了 package.json，通过 npm scripts 进行构建。
+
+```javascript
+{
+  "private": true,
+  "name": "@kyu/pangu",
+  "version": "1.0.0",
+  "scripts": {
+    "watch:less": "nodemon -e less -x \"yarn build:less\"",
+    "watch:widgets": "nodemon -e jsx -x \"yarn build:jsx\"",
+    "watch:jekyll": "jekyll serve --watch",
+    "start": "run-p watch:less watch:widgets watch:jekyll",
+    "build:less": "lessc less/framework.less css/framework.css",
+    "build:jsx": "npx babel widgets --out-dir js --presets react-app/prod",
+    "build:sw": "node scripts/gen-sw.js",
+    "build:jekyll": "jekyll build",
+    "build": "run-s build:sw build:less build:jsx build:jekyll"
+  },
+  "dependencies": {
+    "babel-cli": "6",
+    "babel-preset-react-app": "3",
+    "less": "^3.12.2",
+    "nodemon": "^2.0.6",
+    "npm-run-all": "^4.1.5"
+  }
+}
+```
+
+并行构建 less & jsx & service-worker & jekyll。
+
+## react for pangu
+
+额外解决的一个小问题是如何快速在 Pangu(Jekyll) 中开发 React 小组件呢？方案是通过 CDN 加载 react 脚本。
+
+具体方式可以参考 [add-react-to-a-website](https://reactjs.org/docs/add-react-to-a-website.html)。基于该方式成功开发并引入了 table-of-contents(Post 目录)小组件。
+
+```html
+<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+<!-- widgets -->
+<script src="/js/table-of-content.js"></script>
+```
+
+```jsx
+'use strict';
+
+const { createElement, useState, useEffect } = React;
+
+const TableOfContent = () => {
+  useState();
+
+  // find all h1-h6 doms
+  useEffect(() => {
+  }, []);
+
+  // listen page scroll
+  useEffect(() => {
+    const scrollHandler = () => {};
+    window.addEventListener('scroll', scrollHandler);
+    return () => window.removeEventListener('scroll', scrollHandler);
+  }, []);
+
+  return <div>...</div>;
+};
+
+// Mount
+window.addEventListener('load', () => {
+  const tableOfContentContainer = document.querySelector('#table-of-content');
+  if (tableOfContentContainer) {
+    ReactDOM.render(createElement(TableOfContent), tableOfContentContainer);
+  }
+});
+```
+
+# 成果
+
+最终改造项目可见 [Github Pro](https://github.com/kyuch4n/kyuch4n.github.io)。

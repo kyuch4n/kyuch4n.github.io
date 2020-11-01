@@ -8,8 +8,32 @@ tags:
   - performance optimization
 ---
 
-TO BE CONTINUS ...
+主要做了两方面的优化：preload + service worker
 
-- CDN
-- Preload、Prefetch
-- SW
+# preload
+
+- 通过 `preload` 属性，提前加载项目中的大图。
+- 通过 `Google QuickLink` 预加载后续页面。
+
+```html
+<!-- Preload Img -->
+<link rel="preload" href="/assets/home.jpg" as="image" />
+<link rel="preload" href="/assets/post.jpg" as="image" />
+<link rel="preload" href="/assets/tags.jpg" as="image" />
+<link rel="preload" href="/assets/error.jpg" as="image" />
+<!-- Prefetch By Google QuickLink -->
+<script src="https://unpkg.com/quicklink"></script>
+<script>
+  window.addEventListener('load', () => {
+    quicklink.listen();
+  });
+</script>
+```
+
+# service worker
+
+1. sw `install` 时缓存部分 jpg、js、css 文件。
+2. sw 升级时清空之前版本的缓存。
+3. sw 拦截 `fetch`，基于 白名单 与 黑名单对请求结果进行缓存。
+
+具体 sw 文件可以参考 [service-worker.js](https://github.com/kyuch4n/kyuch4n.github.io/blob/master/packages/pangu/service-worker.js)。

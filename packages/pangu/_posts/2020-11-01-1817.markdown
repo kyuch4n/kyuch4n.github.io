@@ -1,0 +1,13 @@
+---
+layout: post
+title: 'XJBX No.1'
+subtitle: '🦐 JB 想/写'
+date: 2020-11-01
+tags:
+  - XJBX
+---
+
+- 使用 Service Worker 监听 Unload 事件
+  - [使用 Service Worker 监控页面卡死/崩溃](https://www.yuque.com/miaoliaogemie/blog/nztgt8)
+  - [如何监控网页崩溃？](https://juejin.im/entry/6844903705318260743)
+- 使用 Web Worker 实现 Deep Prefetch（好像没啥用...

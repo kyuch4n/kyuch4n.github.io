@@ -9,12 +9,120 @@ tags:
   - content type
 ---
 
-- <a />的默认行为
-- <a  download/>什么时候会触发浏览器的下载
-- 如果要通过 js 做当前页面数据的导出及下载应该怎样搞 (js-file-download)
-- 对于一个链接，浏览器什么情况下会在预览，什么条件下会触发下载
-- 服务端 response 里面 attatchment 属性有什么功能
+> 站在巨人的肩膀上[「让浏览器下载文件的一些手段」](https://cloud.tencent.com/developer/article/1488296)。
 
-- [🔗](https://cloud.tencent.com/developer/article/1488296)
+[「让浏览器下载文件的一些手段」](https://cloud.tencent.com/developer/article/1488296) 对于如何实现文件下载已经做了很好的解说。总结起来有以下几种方法：
 
-TO BE CONTINUS ...
+# download 属性
+
+常规的 `<a>` 标签通过 href 实现链接跳转，如果只想下载文件而不是跳转预览，最好的方式是在 `<a>` 标签中添加 download 属性，就能很简单地实现下载操作。
+
+> 但是注意：此属性仅适用于同源 URL。
+
+# content-disposition
+
+前后端配合完成文件下载的业务场景下，可以通过设置响应头的 Content-Disposition 实现。
+
+Content-Disposition 决定了是以内联的形式（即网页或者页面的一部分），还是以附件的形式下载并保存到本地。
+
+- inline：默认值，表示回复中的消息体会以页面的一部分或者整个页面的形式展示。
+- attachment：消息体应该被下载到本地。大多数浏览器会呈现一个“保存为”的对话框，将 filename 的值预填为下载后的文件名。
+
+# 跨域下载
+
+结合 Blob 和 Fetch，获取跨域资源返回一个 Blob 对象并生成一个 Blob URL，配合 `<a>` 标签的 download 属性触发下载。
+
+```javascript
+function download(href, filename = '') {
+  const a = document.createElement('a');
+  a.download = filename;
+  a.href = href;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+function downloadFile(url, filename = '') {
+  fetch(url, {
+    headers: new Headers({
+      Origin: location.origin,
+    }),
+    mode: 'cors',
+  })
+    .then(res => res.blob())
+    .then(blob => {
+      const blobUrl = window.URL.createObjectURL(blob);
+      download(blobUrl, filename);
+      window.URL.revokeObjectURL(blobUrl);
+    });
+}
+```
+
+> 注意：跨域资源所在的服务器需要配置 Access-Control-Allow-Origin。
+
+# 额外做一些补充
+
+如何动态下载当前页面的内容，例如导出表格？
+
+## 动态下载
+
+同样我们可以基于 Blob URL 和 data URL 实现，并且已经有现成的 NPM 包 - [js-file-download](https://www.npmjs.com/package/js-file-download)。源码如下（实现方式相同）：
+
+```javascript
+module.exports = function(data, filename, mime, bom) {
+  var blobData = typeof bom !== 'undefined' ? [bom, data] : [data];
+  var blob = new Blob(blobData, { type: mime || 'application/octet-stream' });
+  if (typeof window.navigator.msSaveBlob !== 'undefined') {
+    // IE workaround for "HTML7007: One or more blob URLs were
+    // revoked by closing the blob for which they were created.
+    // These URLs will no longer resolve as the data backing
+    // the URL has been freed."
+    window.navigator.msSaveBlob(blob, filename);
+  } else {
+    var blobURL =
+      window.URL && window.URL.createObjectURL
+        ? window.URL.createObjectURL(blob)
+        : window.webkitURL.createObjectURL(blob);
+    var tempLink = document.createElement('a');
+    tempLink.style.display = 'none';
+    tempLink.href = blobURL;
+    tempLink.setAttribute('download', filename);
+    // Safari thinks _blank anchor are pop ups. We only want to set _blank
+    // target if the browser does not support the HTML5 download attribute.
+    // This allows you to download files in desktop safari if pop up blocking
+    // is enabled.
+    if (typeof tempLink.download === 'undefined') {
+      tempLink.setAttribute('target', '_blank');
+    }
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    // Fixes "webkit blob resource error 1"
+    setTimeout(function() {
+      document.body.removeChild(tempLink);
+      window.URL.revokeObjectURL(blobURL);
+    }, 0);
+  }
+};
+```
+
+## application/octet-stream
+
+[js-file-download](https://www.npmjs.com/package/js-file-download) 的实现中将 Content-Type 设置为了 `application/octet-stream`。Content-Type 对于文件下载有什么影响呢？
+
+> [Content-Type](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Type) 实体头部用于指示资源的 MIME 类型 media type 。
+
+在响应中，Content-Type 标头告诉客户端实际返回的内容的内容类型。对于 `text/html`/`application/xml` 这类浏览器可以直接预览的文件类型，当 content-disposition 没有特别的设置时，浏览器会默认进行预览。
+
+而对于浏览器无法识别或不支持预览的类型，如 text/csv，会触发 **另存为** 行为（文件下载），交由对应的应用程序执行。
+
+**所以某些时候修改 Content-Type 也能实现文件下载。** 😏😏😏
+
+<!-- 分割线 -->
+
+---
+
+# 参考
+
+- [HTML \<a\> 元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a)
+- [Content-Type](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Type)
+- [让浏览器下载文件的一些手段](https://cloud.tencent.com/developer/article/1488296)

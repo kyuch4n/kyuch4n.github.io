@@ -4,4 +4,12 @@
   padding-right: 5%;
 }
 
-// .sidebar-container {}
+.sidebar-container {
+  padding: 0;
+  // category-container fixed 时保持 width 与父元素相同
+  max-width: calc(100% / 6);
+  .category-container.fixed {
+    width: 100%;
+    max-width: inherit;
+  }
+}

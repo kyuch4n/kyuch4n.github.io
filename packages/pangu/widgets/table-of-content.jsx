@@ -1,6 +1,7 @@
 'use strict';
 
 const { createElement, useState, useEffect } = React;
+const MARGIN_TOP = 70;
 
 const TableOfContent = () => {
   const [categories, setCategoriies] = useState([]);
@@ -27,7 +28,7 @@ const TableOfContent = () => {
         .querySelector('#table-of-content')
         .getBoundingClientRect().top;
 
-      setIsFixed(relativeTop <= 10);
+      setIsFixed(relativeTop <= MARGIN_TOP);
     };
 
     window.addEventListener('scroll', scrollHandler);
@@ -49,7 +50,7 @@ const TableOfContent = () => {
     }
     .category-container.fixed {
       position: fixed;
-      top: 10px;
+      top: ${MARGIN_TOP}px;
     }
     .category {
       padding: 4px 0;
