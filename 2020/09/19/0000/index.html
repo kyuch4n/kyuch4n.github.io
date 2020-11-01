@@ -47,7 +47,7 @@
 <link rel="preload" href="/assets/home.jpg" as="image" />
 <link rel="preload" href="/assets/post.jpg" as="image" />
 <link rel="preload" href="/assets/tags.jpg" as="image" />
-<link rel="preload" href="/assets/404.jpg" as="image" />
+<link rel="preload" href="/assets/error.jpg" as="image" />
 <!-- Prefetch By Google QuickLink -->
 <script src="https://unpkg.com/quicklink"></script>
 <script>
@@ -160,7 +160,8 @@
     }
   }
 </script>
- <style type="text/css">
+
+    <style type="text/css">
   header.intro-header {
     background-image: url('/assets/post.jpg');
   }
@@ -176,25 +177,23 @@
               class="tag"
               href="/tags/#beforeunload"
               title="beforeunload"
-              >beforeunload</a
             >
+              beforeunload
+            </a>
             
             <a
               class="tag"
               href="/tags/#unload"
               title="unload"
-              >unload</a
             >
+              unload
+            </a>
             
           </div>
           <h1>关于 beforeunload/unload 的二三事</h1>
           <h2 class="subheading"></h2>
           <span class="meta">
-            Posted by
-            
-              kyuchan
-            
-            on September 19, 2020
+            Posted on September 19, 2020
           </span>
         </div>
       </div>
@@ -229,7 +228,7 @@
 
 <h1 id="confirm-dialog">Confirm dialog</h1>
 
-<p><img width="300" src="https://kyuch4n.github.io/assets/beforeunload-dialog.png" /></p>
+<p><img width="300" src="https://kyuch4n.github.io/assets/202009100000/beforeunload-dialog.png" /></p>
 
 <p>如果用户此时正在编辑一些重要的信息，希望在用户离开或者刷新页面前进行二次确认，这又该如何呢？我们还可以监听 beforeunload 事件弹出确认对话框。</p>
 
@@ -302,7 +301,6 @@
 
 <p>不幸的是，如果请求无法被 revert，而离开时的需求逻辑又比较复杂，我也暂时没想到什么特别好的方法。（不如考虑改一下产品逻辑……</p>
 
-        
         <hr />
         <ul class="pager">
           
@@ -330,7 +328,6 @@
           </li>
           
         </ul>
-        
       </div>
       <div
         id="table-of-content"
@@ -339,7 +336,8 @@
     </div>
   </div>
 </article>
- <footer>
+
+    <footer>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
