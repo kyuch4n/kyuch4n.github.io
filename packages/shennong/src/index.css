@@ -1,9 +1,0 @@
-@import '~antd/dist/antd.css';
-
-#root {
-  height: 100vh;
-}
-
-.ant-menu {
-  height: 100%;
-}
