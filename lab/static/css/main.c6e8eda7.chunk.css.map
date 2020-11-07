@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/index.css"],"names":[],"mappings":"AAEA,MACE,YACF,CAEA,UACE,WACF","file":"main.c6e8eda7.chunk.css","sourcesContent":["@import '~antd/dist/antd.css';\n\n#root {\n  height: 100vh;\n}\n\n.ant-menu {\n  height: 100%;\n}\n"]}
