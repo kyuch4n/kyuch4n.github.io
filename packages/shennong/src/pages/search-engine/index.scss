@@ -5,6 +5,12 @@ $bg-color-white: #ffffff;
 $font-color-black: #333333;
 $font-color-light-grey: #c9c9c9;
 
+@mixin text-overflow-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .search-engine-container {
   position: relative;
   padding: 80px 25% 0;
@@ -51,6 +57,7 @@ $font-color-light-grey: #c9c9c9;
         font-size: 16px;
         font-weight: 600;
         color: $font-color-black;
+        @include text-overflow-ellipsis;
       }
 
       &__subtitle {
@@ -59,6 +66,7 @@ $font-color-light-grey: #c9c9c9;
         font-size: 12px;
         font-weight: 400;
         color: $font-color-light-grey;
+        @include text-overflow-ellipsis;
       }
     }
   }
