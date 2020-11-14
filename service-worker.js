@@ -4,7 +4,7 @@
  * !!!
  * @VER will be replaced to the latest timestamp when build
  */
-var VER = 1605334398389;
+var VER = 1605335239580;
 var CACHE_NAME = 'KYU_SW_' + VER;
 var URL_TO_CACHE = [
   '/assets/home.jpg',
